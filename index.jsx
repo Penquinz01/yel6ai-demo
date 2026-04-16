@@ -188,15 +188,15 @@ const liveScenario = [
 ];
 
 const BADGE_COLORS = {
-  hot: { bg: '#3f0d12', color: '#fda4af', border: '#7f1d1d' },
-  warm: { bg: '#3b2f12', color: '#fde68a', border: '#6b4f1d' },
-  cold: { bg: '#0f2234', color: '#93c5fd', border: '#1d4ed8' },
-  new: { bg: '#172033', color: '#cbd5e1', border: '#334155' },
-  qualifying: { bg: '#1e293b', color: '#bfdbfe', border: '#475569' },
-  queued: { bg: '#172033', color: '#cbd5e1', border: '#334155' },
-  finance: { bg: '#052e16', color: '#86efac', border: '#166534' },
-  risk: { bg: '#3b2f12', color: '#fde68a', border: '#6b4f1d' },
-  live: { bg: '#082f49', color: '#7dd3fc', border: '#0ea5e9' },
+  hot: { bg: '#18181b', color: '#f4f4f5', border: '#52525b' },
+  warm: { bg: '#1c1c1f', color: '#e4e4e7', border: '#4b5563' },
+  cold: { bg: '#111111', color: '#d4d4d8', border: '#3f3f46' },
+  new: { bg: '#141414', color: '#e5e7eb', border: '#3f3f46' },
+  qualifying: { bg: '#1a1a1a', color: '#f3f4f6', border: '#52525b' },
+  queued: { bg: '#141414', color: '#e5e7eb', border: '#3f3f46' },
+  finance: { bg: '#0f1711', color: '#d1fae5', border: '#1f3a25' },
+  risk: { bg: '#202020', color: '#fafafa', border: '#5a5a5a' },
+  live: { bg: '#121712', color: '#dcfce7', border: '#35523b' },
 };
 
 function nowLabel() {
@@ -220,16 +220,16 @@ const STYLES = `
     --panel: rgba(8, 8, 8, 0.94);
     --panel-soft: #0d0d0d;
     --panel-border: #2a2a2a;
-    --accent: #67e8f9;
-    --accent-2: #22d3ee;
+    --accent: #bbf7d0;
+    --accent-2: #dcfce7;
     --text-main: #f3f4f6;
     --text-soft: #cbd5e1;
   }
 
   @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(125,211,252,0.45); }
-    70% { box-shadow: 0 0 0 12px rgba(125,211,252,0); }
-    100% { box-shadow: 0 0 0 0 rgba(125,211,252,0); }
+    0% { box-shadow: 0 0 0 0 rgba(245,245,245,0.35); }
+    70% { box-shadow: 0 0 0 12px rgba(245,245,245,0); }
+    100% { box-shadow: 0 0 0 0 rgba(245,245,245,0); }
   }
 
   @keyframes toastIn {
@@ -264,8 +264,7 @@ const STYLES = `
 
   .carlet-root {
     min-height: 100vh;
-    background:
-      linear-gradient(180deg, #0c0c0c 0%, #000000 62%);
+    background: #000000;
     color: var(--text-main);
     font-family: 'DM Sans', sans-serif;
     padding: 40px;
@@ -329,11 +328,11 @@ const STYLES = `
     width: 42px;
     height: 42px;
     border-radius: 12px;
-    background: linear-gradient(140deg, #0891b2, #22d3ee);
+    background: #e5e7eb;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #031322;
+    color: #111111;
   }
 
   .sidebar-label {
@@ -458,8 +457,8 @@ const STYLES = `
     border: none;
     border-radius: 14px;
     padding: 14px 20px;
-    background: #f5f5f4;
-    color: #111827;
+    background: #dcfce7;
+    color: #052e16;
     font-weight: 800;
     cursor: pointer;
     font-family: inherit;
@@ -467,7 +466,7 @@ const STYLES = `
     transition: background 0.15s;
   }
 
-  .btn-primary:hover { background: #ffffff; }
+  .btn-primary:hover { background: #bbf7d0; }
   .btn-primary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   .btn-secondary {
@@ -491,9 +490,9 @@ const STYLES = `
 
   .toast {
     border-radius: 16px;
-    background: #052e16;
-    border: 1px solid #166534;
-    color: #bbf7d0;
+    background: #0f1711;
+    border: 1px solid #2f4b36;
+    color: #dcfce7;
     font-weight: 700;
     padding: 12px 16px;
     margin-bottom: 14px;
@@ -565,7 +564,7 @@ const STYLES = `
     width: 8px;
     height: 8px;
     border-radius: 999px;
-    background: #34d399;
+    background: #86efac;
   }
 
   .toast--entering {
@@ -637,7 +636,7 @@ const STYLES = `
   }
 
   .pipeline-col--active {
-    outline: 2px solid #7dd3fc;
+    outline: 2px solid #f8fafc;
   }
 
   .pipeline-item {
@@ -722,8 +721,8 @@ const STYLES = `
   }
 
   .pipeline-row-live {
-    background: rgba(14, 165, 233, 0.08);
-    border-left: 2px solid #0ea5e9;
+    background: rgba(187, 247, 208, 0.07);
+    border-left: 2px solid #86efac;
   }
 
   .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
@@ -803,7 +802,7 @@ const STYLES = `
   .minibar-fill {
     height: 8px;
     border-radius: 999px;
-    background: linear-gradient(90deg, #67e8f9, #22d3ee);
+    background: #bbf7d0;
     transition: width 0.4s ease;
   }
 
@@ -881,7 +880,7 @@ function EmptyState({ text = 'No leads in this stage' }) {
 function SectionTitle({ icon: Icon, title }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-      {Icon && <Icon size={18} color="#7dd3fc" />}
+      {Icon && <Icon size={18} color="#f3f4f6" />}
       <div style={{ fontWeight: 800, fontSize: 18 }}>{title}</div>
     </div>
   );
@@ -1063,7 +1062,7 @@ export default function CarletYel6AIDemo() {
         <main>
           <div className="utility-row">
             <label className="search-shell" aria-label="Search leads">
-              <Search size={16} color="#93c5fd" />
+              <Search size={16} color="#d4d4d8" />
               <input type="text" value="" readOnly placeholder="Search lead, vehicle, branch" />
             </label>
             <div className="utility-actions">
