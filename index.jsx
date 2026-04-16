@@ -1,12 +1,29 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import {
+  Bell,
+  Building2,
+  Car,
+  ChevronRight,
+  Database,
+  Inbox,
+  KanbanSquare,
+  LayoutDashboard,
+  Play,
+  RefreshCcw,
+  RotateCcw,
+  Search,
+  ShieldCheck,
+  Sparkles,
+  Users,
+} from 'lucide-react';
 
 const tabs = [
-  { id: 'executive', label: 'Executive Summary' },
-  { id: 'inbox', label: 'Lead Inbox' },
-  { id: 'pipeline', label: 'Pipeline Board' },
-  { id: 'records', label: 'Lead Records' },
-  { id: 'manager', label: 'Manager View' },
-  { id: 'reactivation', label: 'Reactivation' },
+  { id: 'executive', label: 'Executive Summary', icon: LayoutDashboard },
+  { id: 'inbox', label: 'Lead Inbox', icon: Inbox },
+  { id: 'pipeline', label: 'Pipeline Board', icon: KanbanSquare },
+  { id: 'records', label: 'Lead Records', icon: Database },
+  { id: 'manager', label: 'Manager View', icon: Users },
+  { id: 'reactivation', label: 'Reactivation', icon: RefreshCcw },
 ];
 
 const initialLeads = [
@@ -197,7 +214,18 @@ function salesActionForLead(lead) {
 }
 
 const STYLES = `
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+  :root {
+    --bg: #030b17;
+    --panel: rgba(15, 23, 42, 0.9);
+    --panel-soft: #0b1324;
+    --panel-border: #1f2d44;
+    --accent: #7dd3fc;
+    --accent-2: #38bdf8;
+    --text-main: #e5e7eb;
+    --text-soft: #9fb0c9;
+  }
 
   @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(125,211,252,0.45); }
@@ -220,67 +248,95 @@ const STYLES = `
     to { opacity: 1; }
   }
 
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   html, body, #root {
     width: 100%;
     min-height: 100%;
     margin: 0;
     padding: 0;
-    background: #020617;
+    background: var(--bg);
   }
 
   * { box-sizing: border-box; }
 
   .carlet-root {
     min-height: 100vh;
-    background: radial-gradient(circle at top, #0f172a 0%, #020617 55%);
-    color: #e5e7eb;
+    background:
+      radial-gradient(circle at 8% 8%, rgba(56, 189, 248, 0.14) 0, rgba(56, 189, 248, 0) 34%),
+      radial-gradient(circle at 90% 18%, rgba(16, 185, 129, 0.12) 0, rgba(16, 185, 129, 0) 32%),
+      radial-gradient(circle at bottom, #0f172a 0%, #030b17 58%);
+    color: var(--text-main);
     font-family: 'DM Sans', sans-serif;
-    padding: 20px;
+    padding: 24px;
   }
 
   .carlet-layout {
     max-width: 1560px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 16px;
+    grid-template-columns: 280px 1fr;
+    gap: 18px;
   }
 
   .panel {
-    background: rgba(15,23,42,0.92);
-    border: 1px solid #1f2d44;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
     border-radius: 22px;
     padding: 18px;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.22);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+    animation: riseIn 0.3s ease-out both;
+    animation-delay: var(--delay, 0ms);
   }
 
   .panel-inner {
-    background: #0b1324;
-    border: 1px solid #1f2d44;
+    background: var(--panel-soft);
+    border: 1px solid var(--panel-border);
     border-radius: 22px;
     padding: 18px;
     box-shadow: none;
   }
 
   .panel-sm {
-    background: #0b1324;
-    border: 1px solid #1f2d44;
+    background: var(--panel-soft);
+    border: 1px solid var(--panel-border);
     border-radius: 16px;
     padding: 14px;
   }
 
   .panel-card {
-    background: #0b1324;
-    border: 1px solid #1f2d44;
+    background: var(--panel-soft);
+    border: 1px solid var(--panel-border);
     border-radius: 16px;
     padding: 12px;
   }
 
   .sidebar {
-    padding: 14px;
+    padding: 16px;
     align-self: start;
     position: sticky;
-    top: 20px;
+    top: 24px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .brand-mark {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(140deg, #0ea5e9, #22d3ee);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #031322;
   }
 
   .sidebar-label {
@@ -288,13 +344,14 @@ const STYLES = `
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
   }
 
   .sidebar-title {
-    font-size: 22px;
+    font-size: 24px;
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   .sidebar-desc {
@@ -311,14 +368,38 @@ const STYLES = `
   }
 
   .nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
     text-align: left;
     border-radius: 14px;
-    padding: 11px 13px;
+    padding: 12px 13px;
     font-weight: 700;
     cursor: pointer;
     font-family: inherit;
     font-size: 14px;
-    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.12s;
+  }
+
+  .nav-btn:hover {
+    transform: translateX(2px);
+  }
+
+  .nav-btn-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .nav-btn-label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .nav-btn-arrow {
+    opacity: 0.45;
   }
 
   .nav-btn:focus-visible {
@@ -361,7 +442,8 @@ const STYLES = `
   }
 
   .header-title {
-    font-size: 30px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 34px;
     font-weight: 800;
     letter-spacing: -0.03em;
   }
@@ -372,6 +454,9 @@ const STYLES = `
   }
 
   .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     border: none;
     border-radius: 14px;
     padding: 12px 16px;
@@ -388,6 +473,9 @@ const STYLES = `
   .btn-primary:focus-visible { outline: 2px solid #7dd3fc; outline-offset: 2px; }
 
   .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     border: 1px solid #334155;
     border-radius: 14px;
     padding: 12px 16px;
@@ -411,6 +499,75 @@ const STYLES = `
     font-weight: 700;
     padding: 12px 16px;
     margin-bottom: 14px;
+  }
+
+  .utility-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .search-shell {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #0a1220;
+    border: 1px solid #24344f;
+    border-radius: 12px;
+    padding: 10px 12px;
+    min-width: 240px;
+  }
+
+  .search-shell input {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #dbe4f0;
+    width: 100%;
+    font-family: inherit;
+    font-size: 13px;
+  }
+
+  .utility-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .icon-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #2a3d5b;
+    background: #0a1220;
+    color: #dbe4f0;
+    cursor: pointer;
+  }
+
+  .profile-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    border: 1px solid #2a3d5b;
+    background: #0a1220;
+    font-size: 13px;
+    color: #dbe4f0;
+    font-weight: 700;
+  }
+
+  .profile-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #34d399;
   }
 
   .toast--entering {
@@ -600,6 +757,41 @@ const STYLES = `
   }
 
   .smoke-item { color: #9fb0c9; line-height: 1.7; font-size: 13px; }
+
+  @media (max-width: 1200px) {
+    .carlet-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      position: static;
+    }
+
+    .inbox-grid,
+    .manager-grid,
+    .react-grid,
+    .conv-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .carlet-root {
+      padding: 14px;
+    }
+
+    .header-title {
+      font-size: 28px;
+    }
+
+    .search-shell {
+      width: 100%;
+    }
+
+    .header-row {
+      margin-bottom: 12px;
+    }
+  }
 `;
 
 function Badge({ type, children }) {
@@ -625,6 +817,15 @@ function MiniBar({ value, max = 100 }) {
 
 function EmptyState({ text = 'No leads in this stage' }) {
   return <div className="empty-state">{text}</div>;
+}
+
+function SectionTitle({ icon: Icon, title }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+      {Icon && <Icon size={18} color="#7dd3fc" />}
+      <div style={{ fontWeight: 800, fontSize: 18 }}>{title}</div>
+    </div>
+  );
 }
 
 export default function CarletYel6AIDemo() {
@@ -771,9 +972,14 @@ export default function CarletYel6AIDemo() {
       <style>{STYLES}</style>
       <div className="carlet-layout">
         {/* Sidebar */}
-        <aside className="panel sidebar">
-          <div className="sidebar-label">YEL6AI OS</div>
-          <div className="sidebar-title">Carlet</div>
+        <aside className="panel sidebar" style={{ '--delay': '40ms' }}>
+          <div className="brand">
+            <div className="brand-mark"><Car size={20} strokeWidth={2.4} /></div>
+            <div>
+              <div className="sidebar-label">YEL6AI OS</div>
+              <div className="sidebar-title">Carlet</div>
+            </div>
+          </div>
           <div className="sidebar-desc">Operational control system for lead capture, qualification, sales routing, stock matching, and reactivation.</div>
           <nav className="nav-grid" aria-label="Main navigation">
             {tabs.map((item) => (
@@ -783,7 +989,11 @@ export default function CarletYel6AIDemo() {
                 className={`nav-btn ${tab === item.id ? 'nav-btn--active' : 'nav-btn--inactive'}`}
                 aria-current={tab === item.id ? 'page' : undefined}
               >
-                {item.label}
+                <span className="nav-btn-label">
+                  <item.icon className="nav-btn-icon" />
+                  {item.label}
+                </span>
+                <ChevronRight size={16} className="nav-btn-arrow" />
               </button>
             ))}
           </nav>
@@ -791,6 +1001,17 @@ export default function CarletYel6AIDemo() {
 
         {/* Main */}
         <main>
+          <div className="utility-row">
+            <label className="search-shell" aria-label="Search leads">
+              <Search size={16} color="#93c5fd" />
+              <input type="text" value="" readOnly placeholder="Search lead, vehicle, branch" />
+            </label>
+            <div className="utility-actions">
+              <button className="icon-btn" aria-label="Notifications"><Bell size={17} /></button>
+              <div className="profile-chip"><span className="profile-dot" /> Operations Online</div>
+            </div>
+          </div>
+
           <div className="header-row">
             <div>
               <div className="header-label">YEL6AI &middot; Carlet Workspace</div>
@@ -799,9 +1020,10 @@ export default function CarletYel6AIDemo() {
             </div>
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
               <button onClick={playLiveDemo} className="btn-primary" disabled={isPlaying}>
+                <Play size={16} />
                 {isPlaying ? 'Running\u2026' : 'Play Live Demo'}
               </button>
-              <button onClick={resetDemo} className="btn-secondary">Reset</button>
+              <button onClick={resetDemo} className="btn-secondary"><RotateCcw size={16} />Reset</button>
             </div>
           </div>
 
@@ -814,8 +1036,8 @@ export default function CarletYel6AIDemo() {
 
           {/* Executive */}
           {tab === 'executive' && (
-            <section className="panel" aria-label="Executive Summary">
-              <div style={{ fontWeight: 800, fontSize: 20, marginBottom: 16 }}>Executive Summary</div>
+            <section className="panel" aria-label="Executive Summary" style={{ '--delay': '70ms' }}>
+              <SectionTitle icon={LayoutDashboard} title="Executive Summary" />
               <div className="stat-grid">
                 {[
                   { title: 'Finance-Ready Buyers', value: financeReady.length, sub: 'ready to push into close', tone: 'finance' },
@@ -840,8 +1062,8 @@ export default function CarletYel6AIDemo() {
           {tab === 'inbox' && (
             <section className="inbox-grid" aria-label="Lead Inbox">
               {/* Lead list */}
-              <div className="panel">
-                <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 12 }}>Active Leads</div>
+              <div className="panel" style={{ '--delay': '70ms' }}>
+                <SectionTitle icon={Inbox} title="Active Leads" />
                 {leads.length === 0 && <EmptyState text="No active leads" />}
                 {leads.map((lead) => (
                   <button
@@ -861,7 +1083,7 @@ export default function CarletYel6AIDemo() {
               </div>
 
               {/* Lead detail */}
-              <div className="panel">
+              <div className="panel" style={{ '--delay': '110ms' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, alignItems: 'center', marginBottom: 16, flexWrap: 'wrap' }}>
                   <div>
                     <div style={{ fontSize: 24, fontWeight: 800 }}>{selectedLead.name}</div>
@@ -927,8 +1149,8 @@ export default function CarletYel6AIDemo() {
               </div>
 
               {/* Sales action panel */}
-              <div className="panel">
-                <div style={{ fontWeight: 800, marginBottom: 12 }}>Sales Action Panel</div>
+              <div className="panel" style={{ '--delay': '150ms' }}>
+                <SectionTitle icon={ShieldCheck} title="Sales Action Panel" />
                 {[
                   ['Owner', salesAction.owner],
                   ['Priority', salesAction.priority],
@@ -946,8 +1168,8 @@ export default function CarletYel6AIDemo() {
 
           {/* Pipeline */}
           {tab === 'pipeline' && (
-            <section className="panel" aria-label="Pipeline Board">
-              <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 14 }}>Pipeline Board</div>
+            <section className="panel" aria-label="Pipeline Board" style={{ '--delay': '70ms' }}>
+              <SectionTitle icon={KanbanSquare} title="Pipeline Board" />
               <div className="pipeline-grid">
                 {pipelineColumns.map((column) => {
                   const activeColumn = isPlaying && (
@@ -989,8 +1211,8 @@ export default function CarletYel6AIDemo() {
 
           {/* Records */}
           {tab === 'records' && (
-            <section className="panel" aria-label="Lead Records">
-              <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 14 }}>Master Lead Records</div>
+            <section className="panel" aria-label="Lead Records" style={{ '--delay': '70ms' }}>
+              <SectionTitle icon={Database} title="Master Lead Records" />
               <div style={{ overflowX: 'auto' }}>
                 <table className="records-table">
                   <thead>
@@ -1039,8 +1261,8 @@ export default function CarletYel6AIDemo() {
           {/* Manager */}
           {tab === 'manager' && (
             <section className="manager-grid" aria-label="Manager View">
-              <div className="panel">
-                <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 14 }}>Manager Overview</div>
+              <div className="panel" style={{ '--delay': '70ms' }}>
+                <SectionTitle icon={Building2} title="Manager Overview" />
                 <div className="stat-grid" style={{ marginBottom: 14 }}>
                   {[
                     ['Instagram', `${channelStats['Instagram'] || 0} leads`, 'From DM campaigns'],
@@ -1056,8 +1278,8 @@ export default function CarletYel6AIDemo() {
                   ))}
                 </div>
               </div>
-              <div className="panel">
-                <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 14 }}>Team Queue</div>
+              <div className="panel" style={{ '--delay': '110ms' }}>
+                <SectionTitle icon={Users} title="Team Queue" />
                 {teamStats.map((member) => (
                   <div key={member.name} className="panel-sm" style={{ marginBottom: 10 }}>
                     <div style={{ fontWeight: 700 }}>{member.name}</div>
@@ -1072,8 +1294,8 @@ export default function CarletYel6AIDemo() {
           {/* Reactivation */}
           {tab === 'reactivation' && (
             <section className="react-grid" aria-label="Reactivation Queue">
-              <div className="panel">
-                <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 14 }}>Reactivation Queue</div>
+              <div className="panel" style={{ '--delay': '70ms' }}>
+                <SectionTitle icon={RefreshCcw} title="Reactivation Queue" />
                 {reactivationQueue.map((item, idx) => (
                   <div key={`react-${idx}`} className="panel-sm" style={{ marginBottom: 10 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, alignItems: 'center' }}>
@@ -1085,8 +1307,8 @@ export default function CarletYel6AIDemo() {
                   </div>
                 ))}
               </div>
-              <div className="panel">
-                <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 14 }}>Outgoing Message Preview</div>
+              <div className="panel" style={{ '--delay': '110ms' }}>
+                <SectionTitle icon={Sparkles} title="Outgoing Message Preview" />
                 <div className="panel-inner" style={{ lineHeight: 1.8 }}>
                   Hi Fahad — sharing this because you had asked about Baleno earlier. We currently have a few matching options and can also help if finance support is needed. Are you still looking, or should I share the best available choices for your budget?
                 </div>
