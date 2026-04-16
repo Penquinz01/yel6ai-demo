@@ -719,7 +719,7 @@ const STYLES = `
 
   .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
   .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; }
-  .conv-layout { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px; align-items: start; }
+  .conv-layout { display: grid; grid-template-columns: 1fr; gap: 20px; }
   .manager-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 24px; }
   .react-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 
@@ -757,7 +757,7 @@ const STYLES = `
 
   .lead-insights {
     display: grid;
-    gap: 18px;
+    gap: 16px;
   }
 
   .lead-insight-block {
