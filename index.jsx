@@ -225,6 +225,8 @@ const STYLES = `
     --accent-2: #bbf7d0;
     --text-main: #f3f4f6;
     --text-soft: #cbd5e1;
+    --panel-motion: 420ms;
+    --panel-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
   @keyframes pulse {
@@ -278,6 +280,7 @@ const STYLES = `
     display: grid;
     grid-template-columns: var(--sidebar-width, 280px) minmax(0, 1fr);
     gap: 0;
+    transition: grid-template-columns var(--panel-motion) var(--panel-ease);
   }
 
   .carlet-layout.sidebar-collapsed {
@@ -321,6 +324,7 @@ const STYLES = `
     align-self: start;
     position: sticky;
     top: 0;
+    transition: padding var(--panel-motion) var(--panel-ease);
   }
 
   .side-panel {
@@ -331,6 +335,8 @@ const STYLES = `
     border-bottom: none;
     box-shadow: none;
     background: #060606;
+    position: relative;
+    overflow: visible;
   }
 
   .sidebar-top {
@@ -352,6 +358,12 @@ const STYLES = `
     justify-content: center;
     cursor: pointer;
     flex-shrink: 0;
+    position: absolute;
+    top: 50%;
+    right: -17px;
+    transform: translateY(-50%);
+    z-index: 8;
+    transition: background 0.18s ease, border-color 0.18s ease;
   }
 
   .sidebar-collapse-btn:hover {
@@ -399,11 +411,23 @@ const STYLES = `
     margin-bottom: 4px;
   }
 
+  .brand-meta {
+    max-width: 220px;
+    transition: opacity 260ms ease, max-width var(--panel-motion) var(--panel-ease), transform var(--panel-motion) var(--panel-ease);
+    transform-origin: left center;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
   .sidebar-desc {
     color: #b4b4b4;
     font-size: 13px;
     line-height: 1.6;
     margin-bottom: 24px;
+    overflow: hidden;
+    max-height: 96px;
+    transition: opacity 260ms ease, max-height var(--panel-motion) var(--panel-ease), margin var(--panel-motion) var(--panel-ease), transform var(--panel-motion) var(--panel-ease);
+    transform-origin: top left;
   }
 
   .nav-grid {
@@ -424,7 +448,7 @@ const STYLES = `
     cursor: pointer;
     font-family: inherit;
     font-size: 14px;
-    transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.12s;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.16s ease, padding var(--panel-motion) var(--panel-ease);
   }
 
   .nav-btn:hover {
@@ -441,10 +465,33 @@ const STYLES = `
     display: flex;
     align-items: center;
     gap: 9px;
+    min-width: 0;
+  }
+
+  .nav-btn-text {
+    display: inline-block;
+    min-width: 0;
+    max-width: 180px;
+    overflow: hidden;
+    white-space: nowrap;
+    transform-origin: left center;
+    transition: opacity 260ms ease, transform var(--panel-motion) var(--panel-ease), max-width var(--panel-motion) var(--panel-ease);
   }
 
   .nav-btn-arrow {
     opacity: 0.45;
+    width: 16px;
+    min-width: 16px;
+    overflow: hidden;
+    transition: opacity 260ms ease, transform var(--panel-motion) var(--panel-ease), width var(--panel-motion) var(--panel-ease), min-width var(--panel-motion) var(--panel-ease);
+  }
+
+  .sidebar-toggle-icon {
+    transition: transform var(--panel-motion) var(--panel-ease);
+  }
+
+  .sidebar-toggle-icon.is-open {
+    transform: rotate(180deg);
   }
 
   .main-shell {
@@ -457,16 +504,33 @@ const STYLES = `
   }
 
   .sidebar-collapsed .sidebar-top {
-    position: relative;
     justify-content: center;
   }
 
-  .sidebar-collapsed .sidebar-desc,
+  .sidebar-collapsed .sidebar-desc {
+    opacity: 0;
+    max-height: 0;
+    margin-bottom: 0;
+    transform: translateX(-6px);
+    pointer-events: none;
+  }
+
   .sidebar-collapsed .sidebar-label,
   .sidebar-collapsed .sidebar-title,
   .sidebar-collapsed .nav-btn-text,
   .sidebar-collapsed .nav-btn-arrow {
-    display: none;
+    opacity: 0;
+    transform: translateX(-6px);
+    pointer-events: none;
+  }
+
+  .sidebar-collapsed .nav-btn-text {
+    max-width: 0;
+  }
+
+  .sidebar-collapsed .nav-btn-arrow {
+    width: 0;
+    min-width: 0;
   }
 
   .sidebar-collapsed .brand {
@@ -475,14 +539,11 @@ const STYLES = `
     margin-bottom: 8px;
   }
 
-  .sidebar-collapsed .brand > div:not(.brand-mark) {
-    display: none;
-  }
-
-  .sidebar-collapsed .sidebar-collapse-btn {
-    position: absolute;
-    right: 2px;
-    top: 4px;
+  .sidebar-collapsed .brand-meta {
+    opacity: 0;
+    max-width: 0;
+    transform: translateX(-6px);
+    pointer-events: none;
   }
 
   .sidebar-collapsed .nav-btn {
@@ -492,6 +553,18 @@ const STYLES = `
 
   .sidebar-collapsed .nav-btn-label {
     gap: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carlet-layout,
+    .sidebar,
+    .sidebar-desc,
+    .brand-meta,
+    .nav-btn-text,
+    .nav-btn-arrow,
+    .sidebar-toggle-icon {
+      transition: none !important;
+    }
   }
 
   .nav-btn:focus-visible {
@@ -930,6 +1003,11 @@ const STYLES = `
       border-right: 1px solid var(--panel-border);
     }
 
+    .sidebar-collapse-btn {
+      position: static;
+      transform: none;
+    }
+
     .inbox-grid,
     .manager-grid,
     .react-grid,
@@ -1148,7 +1226,7 @@ export default function CarletYel6AIDemo() {
               <div className="brand-mark" aria-hidden="true">
                 <Car size={20} strokeWidth={2.4} />
               </div>
-              <div>
+              <div className="brand-meta">
                 <div className="sidebar-label">YEL6AI OS</div>
                 <div className="sidebar-title">Carlet</div>
               </div>
@@ -1159,7 +1237,7 @@ export default function CarletYel6AIDemo() {
               aria-label={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
               title={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
             >
-              <ChevronRight size={16} style={{ transform: sidebarOpen ? 'rotate(180deg)' : 'none' }} />
+              <ChevronRight size={16} className={`sidebar-toggle-icon ${sidebarOpen ? 'is-open' : ''}`} />
             </button>
           </div>
           <div className="sidebar-desc">Operational control system for lead capture, qualification, sales routing, stock matching, and reactivation.</div>
