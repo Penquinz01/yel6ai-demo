@@ -1148,36 +1148,6 @@ export default function CarletYel6AIDemo() {
 
               {/* Lead detail */}
               <div className="panel" style={{ '--delay': '110ms' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, alignItems: 'center', marginBottom: 16, flexWrap: 'wrap' }}>
-                  <div>
-                    <div style={{ fontSize: 24, fontWeight: 800 }}>{selectedLead.name}</div>
-                    <div className="label-sub" style={{ marginTop: 4 }}>{selectedLead.id} &middot; {selectedLead.phone} &middot; {selectedLead.source}</div>
-                  </div>
-                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    <Badge type={selectedLead.status} />
-                    <Badge type="finance">{selectedLead.financeReadiness}</Badge>
-                    <Badge type="risk">{selectedLead.riskLevel}</Badge>
-                  </div>
-                </div>
-
-                <div className="lead-facts">
-                  {[
-                    ['Vehicle', selectedLead.interest],
-                    ['Budget', selectedLead.budget],
-                    ['Location', selectedLead.location],
-                    ['Finance', selectedLead.finance],
-                    ['Timeline', selectedLead.timeline],
-                    ['Branch', selectedLead.branch],
-                    ['Stock', selectedLead.stockStatus],
-                    ['Follow-Up', selectedLead.followupStatus],
-                  ].map(([label, value]) => (
-                    <div key={label} className="lead-fact">
-                      <div className="lead-fact-label">{label}</div>
-                      <div className="lead-fact-value">{value}</div>
-                    </div>
-                  ))}
-                </div>
-
                 <div className="conv-layout">
                   <div className="lead-conversation">
                     <div style={{ fontWeight: 800, marginBottom: 12 }}>Conversation</div>
@@ -1209,6 +1179,36 @@ export default function CarletYel6AIDemo() {
                       ))}
                     </div>
                   </div>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, alignItems: 'center', marginBottom: 16, flexWrap: 'wrap' }}>
+                  <div>
+                    <div style={{ fontSize: 24, fontWeight: 800 }}>{selectedLead.name}</div>
+                    <div className="label-sub" style={{ marginTop: 4 }}>{selectedLead.id} &middot; {selectedLead.phone} &middot; {selectedLead.source}</div>
+                  </div>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                    <Badge type={selectedLead.status} />
+                    <Badge type="finance">{selectedLead.financeReadiness}</Badge>
+                    <Badge type="risk">{selectedLead.riskLevel}</Badge>
+                  </div>
+                </div>
+
+                <div className="lead-facts">
+                  {[
+                    ['Vehicle', selectedLead.interest],
+                    ['Budget', selectedLead.budget],
+                    ['Location', selectedLead.location],
+                    ['Finance', selectedLead.finance],
+                    ['Timeline', selectedLead.timeline],
+                    ['Branch', selectedLead.branch],
+                    ['Stock', selectedLead.stockStatus],
+                    ['Follow-Up', selectedLead.followupStatus],
+                  ].map(([label, value]) => (
+                    <div key={label} className="lead-fact">
+                      <div className="lead-fact-label">{label}</div>
+                      <div className="lead-fact-value">{value}</div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
