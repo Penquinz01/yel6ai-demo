@@ -289,6 +289,23 @@ Error generating stack: `+o.message+`
     background: #f1f5f9 !important;
   }
 
+  .carlet-root.theme-light .lead-fact {
+    background: #ffffff;
+    border-color: #d7deea;
+  }
+
+  .carlet-root.theme-light .lead-fact-value {
+    color: #0f172a;
+  }
+
+  .carlet-root.theme-light .lead-insight-block {
+    border-left-color: #93c5fd;
+  }
+
+  .carlet-root.theme-light .text-body {
+    color: #1e293b;
+  }
+
   .carlet-root.theme-light .msg-bubble {
     border-color: #d7deea;
   }

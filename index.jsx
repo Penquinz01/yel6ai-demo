@@ -333,6 +333,17 @@ const STYLES = `
     color: #0f172a;
   }
 
+  .carlet-root.theme-light .btn-secondary {
+    border-color: #cbd5e1;
+    background: #ffffff;
+    color: #0f172a;
+  }
+
+  .carlet-root.theme-light .btn-secondary:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+  }
+
   .carlet-root.theme-light .search-shell input {
     color: #0f172a;
   }
@@ -353,6 +364,23 @@ const STYLES = `
 
   .carlet-root.theme-light .lead-card:hover {
     background: #f1f5f9 !important;
+  }
+
+  .carlet-root.theme-light .lead-fact {
+    background: #ffffff;
+    border-color: #d7deea;
+  }
+
+  .carlet-root.theme-light .lead-fact-value {
+    color: #0f172a;
+  }
+
+  .carlet-root.theme-light .lead-insight-block {
+    border-left-color: #93c5fd;
+  }
+
+  .carlet-root.theme-light .text-body {
+    color: #1e293b;
   }
 
   .carlet-root.theme-light .msg-bubble {
