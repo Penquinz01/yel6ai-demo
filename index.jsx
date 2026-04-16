@@ -8,12 +8,14 @@ import {
   Inbox,
   KanbanSquare,
   LayoutDashboard,
+  Moon,
   Play,
   RefreshCcw,
   RotateCcw,
   Search,
   ShieldCheck,
   Sparkles,
+  Sun,
   Users,
 } from 'lucide-react';
 
@@ -267,10 +269,129 @@ const STYLES = `
 
   .carlet-root {
     min-height: 100vh;
-    background: #000000;
+    background: var(--bg);
     color: var(--text-main);
     font-family: 'DM Sans', sans-serif;
     padding: 0;
+    transition: background 240ms ease, color 240ms ease;
+  }
+
+  .carlet-root.theme-light {
+    --bg: #f3f5f8;
+    --panel: rgba(255, 255, 255, 0.94);
+    --panel-soft: #ffffff;
+    --panel-border: #d7deea;
+    --accent: #22c55e;
+    --accent-2: #86efac;
+    --text-main: #111827;
+    --text-soft: #334155;
+  }
+
+  .carlet-root.theme-light .side-panel {
+    background: #eef2f7;
+  }
+
+  .carlet-root.theme-light .sidebar-label {
+    color: #64748b;
+  }
+
+  .carlet-root.theme-light .sidebar-desc,
+  .carlet-root.theme-light .header-sub,
+  .carlet-root.theme-light .text-muted,
+  .carlet-root.theme-light .label-sub,
+  .carlet-root.theme-light .lead-fact-label,
+  .carlet-root.theme-light .label-upper {
+    color: #475569;
+  }
+
+  .carlet-root.theme-light .header-label {
+    color: #64748b;
+  }
+
+  .carlet-root.theme-light .nav-btn--active {
+    border-color: #cbd5e1;
+    background: #ffffff;
+    color: #0f172a;
+  }
+
+  .carlet-root.theme-light .nav-btn--inactive {
+    border-color: #d7deea;
+    background: #f8fafc;
+    color: #334155;
+  }
+
+  .carlet-root.theme-light .nav-btn--inactive:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+  }
+
+  .carlet-root.theme-light .search-shell,
+  .carlet-root.theme-light .icon-btn,
+  .carlet-root.theme-light .profile-chip {
+    background: #ffffff;
+    border-color: #d7deea;
+    color: #0f172a;
+  }
+
+  .carlet-root.theme-light .search-shell input {
+    color: #0f172a;
+  }
+
+  .carlet-root.theme-light .lead-card {
+    color: #0f172a;
+  }
+
+  .carlet-root.theme-light .lead-card--selected {
+    background: #eef2f7;
+    border-color: #cbd5e1;
+  }
+
+  .carlet-root.theme-light .lead-card--default {
+    background: #ffffff;
+    border-color: #d7deea;
+  }
+
+  .carlet-root.theme-light .lead-card:hover {
+    background: #f1f5f9 !important;
+  }
+
+  .carlet-root.theme-light .msg-bubble {
+    border-color: #d7deea;
+  }
+
+  .carlet-root.theme-light .msg-bubble--ai {
+    background: #f8fafc;
+  }
+
+  .carlet-root.theme-light .msg-bubble--customer {
+    background: #ffffff;
+  }
+
+  .carlet-root.theme-light .msg-typing {
+    background: #f8fafc;
+    border-color: #d7deea;
+    color: #334155;
+  }
+
+  .carlet-root.theme-light .records-table thead tr {
+    background: #f8fafc;
+  }
+
+  .carlet-root.theme-light .records-table th {
+    color: #334155;
+    border-bottom-color: #d7deea;
+  }
+
+  .carlet-root.theme-light .records-table tbody tr {
+    border-bottom-color: #e2e8f0;
+  }
+
+  .carlet-root.theme-light .records-table tbody tr:hover {
+    background: #f8fafc;
+  }
+
+  .carlet-root.theme-light .empty-state {
+    color: #64748b;
   }
 
   .carlet-layout {
@@ -733,6 +854,14 @@ const STYLES = `
     cursor: pointer;
   }
 
+  .theme-toggle {
+    width: auto;
+    padding: 0 12px;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
   .profile-chip {
     display: inline-flex;
     align-items: center;
@@ -1094,6 +1223,11 @@ function SectionTitle({ icon: Icon, title }) {
 
 export default function CarletYel6AIDemo() {
   const [tab, setTab] = useState('executive');
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') return 'dark';
+    const savedTheme = window.localStorage.getItem('carlet-theme');
+    return savedTheme === 'light' ? 'light' : 'dark';
+  });
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [leads, setLeads] = useState(initialLeads);
   const [selectedLeadId, setSelectedLeadId] = useState(initialLeads[0].id);
@@ -1234,8 +1368,12 @@ export default function CarletYel6AIDemo() {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); action(); }
   }, []);
 
+  useEffect(() => {
+    window.localStorage.setItem('carlet-theme', theme);
+  }, [theme]);
+
   return (
-    <div className="carlet-root">
+    <div className={`carlet-root ${theme === 'light' ? 'theme-light' : 'theme-dark'}`}>
       <style>{STYLES}</style>
       <div className={`carlet-layout ${sidebarOpen ? '' : 'sidebar-collapsed'}`}>
         {/* Sidebar */}
@@ -1282,10 +1420,19 @@ export default function CarletYel6AIDemo() {
         <main className="main-shell">
           <div className="utility-row">
             <label className="search-shell" aria-label="Search leads">
-              <Search size={16} color="#bbf7d0" />
+              <Search size={16} color="var(--accent)" />
               <input type="text" value="" readOnly placeholder="Search lead, vehicle, branch" />
             </label>
             <div className="utility-actions">
+              <button
+                className="icon-btn theme-toggle"
+                onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+                {theme === 'dark' ? 'Light' : 'Dark'}
+              </button>
               <button className="icon-btn" aria-label="Notifications"><Bell size={17} /></button>
               <div className="profile-chip"><span className="profile-dot" /> Operations Online</div>
             </div>
@@ -1604,13 +1751,6 @@ export default function CarletYel6AIDemo() {
           )}
 
           {/* Smoke checks */}
-          <div className="panel-inner" style={{ marginTop: 16 }}>
-            <div style={{ fontWeight: 800, marginBottom: 8 }}>Smoke checks</div>
-            <div className="smoke-item">&bull; Canvas preview loads without syntax errors</div>
-            <div className="smoke-item">&bull; Play Live Demo creates LD-1088 and updates it through qualification</div>
-            <div className="smoke-item">&bull; Navigation switches between all tabs</div>
-            <div className="smoke-item">&bull; Clicking a row in Lead Records opens that lead in Lead Inbox</div>
-          </div>
         </main>
       </div>
     </div>
