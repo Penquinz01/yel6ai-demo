@@ -717,6 +717,18 @@ const STYLES = `
 
   .records-table td.wrap { white-space: normal; min-width: 150px; }
 
+  .pipeline-head-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .pipeline-row-live {
+    background: rgba(14, 165, 233, 0.08);
+    border-left: 2px solid #0ea5e9;
+  }
+
   .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
   .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; }
   .conv-layout { display: grid; grid-template-columns: 1fr; gap: 20px; }
@@ -902,13 +914,15 @@ export default function CarletYel6AIDemo() {
   const overdueFollowups = useMemo(() => leads.filter((l) => l.followupStatus.toLowerCase().includes('overdue') || l.followupStatus.toLowerCase().includes('due')), [leads]);
   const branchCount = useMemo(() => new Set(leads.map((l) => l.branch)).size, [leads]);
 
-  const pipelineColumns = useMemo(() => [
-    { id: 'new', label: 'New', leads: newLeads },
-    { id: 'qualifying', label: 'Qualifying', leads: qualifyingLeads },
-    { id: 'hot', label: 'Hot', leads: hotLeads },
-    { id: 'warm', label: 'Warm', leads: warmLeads },
-    { id: 'cold', label: 'Reactivation', leads: coldLeads },
-  ], [newLeads, qualifyingLeads, hotLeads, warmLeads, coldLeads]);
+  const pipelineRows = useMemo(() => {
+    const stageRank = { new: 0, qualifying: 1, hot: 2, warm: 3, cold: 4 };
+    return [...leads].sort((a, b) => {
+      const rankA = stageRank[a.status] ?? 99;
+      const rankB = stageRank[b.status] ?? 99;
+      if (rankA !== rankB) return rankA - rankB;
+      return b.score - a.score;
+    });
+  }, [leads]);
 
   // Compute dynamic manager data from leads state
   const teamStats = useMemo(() => {
@@ -1220,41 +1234,49 @@ export default function CarletYel6AIDemo() {
           {tab === 'pipeline' && (
             <section className="panel" aria-label="Pipeline Board" style={{ '--delay': '70ms' }}>
               <SectionTitle icon={KanbanSquare} title="Pipeline Board" />
-              <div className="pipeline-grid">
-                {pipelineColumns.map((column) => {
-                  const activeColumn = isPlaying && (
-                    (column.id === 'new' && scenarioIndex <= 0) ||
-                    (column.id === 'qualifying' && scenarioIndex >= 1 && scenarioIndex <= 5) ||
-                    (column.id === 'hot' && scenarioIndex >= 6)
-                  );
-                  return (
-                    <div key={column.id} className={`panel-inner pipeline-col ${activeColumn ? 'pipeline-col--active' : ''}`}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                        <div style={{ fontWeight: 800 }}>{column.label}</div>
-                        <Badge type={column.id === 'cold' ? 'queued' : column.id}>{column.leads.length}</Badge>
-                      </div>
-                      <MiniBar value={column.leads.length * 20} />
-                      {column.leads.length === 0 && <EmptyState />}
-                      {column.leads.map((lead) => (
-                        <div
-                          key={lead.id}
-                          className="pipeline-item"
-                          onClick={() => { setSelectedLeadId(lead.id); setTab('inbox'); }}
-                          onKeyDown={(e) => handleKeyNav(e, () => { setSelectedLeadId(lead.id); setTab('inbox'); })}
-                          tabIndex={0}
-                          role="button"
-                          aria-label={`View ${lead.name}`}
-                        >
-                          <div style={{ fontWeight: 700, fontSize: 14 }}>{lead.name}</div>
-                          <div className="label-sub" style={{ marginTop: 4 }}>{lead.interest}</div>
-                          <div style={{ marginTop: 8, display: 'flex', justifyContent: 'space-between', fontSize: 12 }} className="text-muted">
-                            <span>{lead.channel}</span><span>Score {lead.score}</span>
-                          </div>
-                        </div>
+              <div className="pipeline-head-stats">
+                <Badge type="new">New {newLeads.length}</Badge>
+                <Badge type="qualifying">Qualifying {qualifyingLeads.length}</Badge>
+                <Badge type="hot">Hot {hotLeads.length}</Badge>
+                <Badge type="warm">Warm {warmLeads.length}</Badge>
+                <Badge type="queued">Reactivation {coldLeads.length}</Badge>
+              </div>
+              <div style={{ overflowX: 'auto' }}>
+                <table className="records-table">
+                  <thead>
+                    <tr>
+                      {['Stage', 'Lead', 'Vehicle', 'Channel', 'Score', 'Budget', 'Location', 'Owner', 'Next Action'].map((h) => (
+                        <th key={h}>{h}</th>
                       ))}
-                    </div>
-                  );
-                })}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {pipelineRows.length === 0 && (
+                      <tr><td colSpan={9} style={{ textAlign: 'center', padding: 40, color: '#475569', fontStyle: 'italic' }}>No pipeline leads</td></tr>
+                    )}
+                    {pipelineRows.map((lead) => (
+                      <tr
+                        key={lead.id}
+                        className={lead.id === 'LD-1088' && isPlaying ? 'pipeline-row-live' : ''}
+                        onClick={() => { setSelectedLeadId(lead.id); setTab('inbox'); }}
+                        onKeyDown={(e) => handleKeyNav(e, () => { setSelectedLeadId(lead.id); setTab('inbox'); })}
+                        tabIndex={0}
+                        role="button"
+                        aria-label={`View lead ${lead.name}`}
+                      >
+                        <td><Badge type={lead.status === 'cold' ? 'queued' : lead.status}>{lead.status === 'cold' ? 'reactivation' : lead.status}</Badge></td>
+                        <td>{lead.name}</td>
+                        <td className="wrap">{lead.interest}</td>
+                        <td>{lead.channel}</td>
+                        <td>{lead.score}</td>
+                        <td>{lead.budget}</td>
+                        <td>{lead.location}</td>
+                        <td>{lead.assigned}</td>
+                        <td className="wrap">{lead.nextAction}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </section>
           )}
