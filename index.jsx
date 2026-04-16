@@ -265,9 +265,7 @@ const STYLES = `
   .carlet-root {
     min-height: 100vh;
     background:
-      radial-gradient(circle at 8% 8%, rgba(34, 211, 238, 0.12) 0, rgba(34, 211, 238, 0) 34%),
-      radial-gradient(circle at 90% 18%, rgba(56, 189, 248, 0.1) 0, rgba(56, 189, 248, 0) 32%),
-      radial-gradient(circle at bottom, #101010 0%, #000000 58%);
+      linear-gradient(180deg, #0c0c0c 0%, #000000 62%);
     color: var(--text-main);
     font-family: 'DM Sans', sans-serif;
     padding: 40px;
@@ -460,8 +458,8 @@ const STYLES = `
     border: none;
     border-radius: 14px;
     padding: 14px 20px;
-    background: var(--accent-2);
-    color: #001018;
+    background: #f5f5f4;
+    color: #111827;
     font-weight: 800;
     cursor: pointer;
     font-family: inherit;
@@ -469,7 +467,7 @@ const STYLES = `
     transition: background 0.15s;
   }
 
-  .btn-primary:hover { background: #67e8f9; }
+  .btn-primary:hover { background: #ffffff; }
   .btn-primary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   .btn-secondary {
