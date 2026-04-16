@@ -719,9 +719,58 @@ const STYLES = `
 
   .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
   .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; }
-  .conv-layout { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 20px; }
+  .conv-layout { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px; align-items: start; }
   .manager-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 24px; }
   .react-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .lead-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .lead-fact {
+    min-width: 170px;
+    border: 1px solid #22324a;
+    border-radius: 12px;
+    background: rgba(9, 17, 31, 0.62);
+    padding: 10px 12px;
+  }
+
+  .lead-fact-label {
+    color: #8fa1bf;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .lead-fact-value {
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .lead-conversation {
+    padding-right: 4px;
+  }
+
+  .lead-insights {
+    display: grid;
+    gap: 18px;
+  }
+
+  .lead-insight-block {
+    border-left: 2px solid #223a59;
+    padding-left: 14px;
+  }
+
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
 
   .label-upper {
     color: #8fa1bf;
@@ -1097,7 +1146,7 @@ export default function CarletYel6AIDemo() {
                   </div>
                 </div>
 
-                <div className="detail-grid" style={{ marginBottom: 16 }}>
+                <div className="lead-facts">
                   {[
                     ['Vehicle', selectedLead.interest],
                     ['Budget', selectedLead.budget],
@@ -1108,15 +1157,15 @@ export default function CarletYel6AIDemo() {
                     ['Stock', selectedLead.stockStatus],
                     ['Follow-Up', selectedLead.followupStatus],
                   ].map(([label, value]) => (
-                    <div key={label} className="panel-card">
-                      <div className="label-upper">{label}</div>
-                      <div style={{ marginTop: 8, fontSize: 14, lineHeight: 1.4 }}>{value}</div>
+                    <div key={label} className="lead-fact">
+                      <div className="lead-fact-label">{label}</div>
+                      <div className="lead-fact-value">{value}</div>
                     </div>
                   ))}
                 </div>
 
                 <div className="conv-layout">
-                  <div className="panel-inner">
+                  <div className="lead-conversation">
                     <div style={{ fontWeight: 800, marginBottom: 12 }}>Conversation</div>
                     {selectedLead.messages.map((msg, idx) => (
                       <div
@@ -1131,15 +1180,15 @@ export default function CarletYel6AIDemo() {
                       <div className="msg-typing">typing&hellip;</div>
                     )}
                   </div>
-                  <div style={{ display: 'grid', gap: 14 }}>
-                    <div className="panel-inner">
+                  <div className="lead-insights">
+                    <div className="lead-insight-block">
                       <div style={{ fontWeight: 800, marginBottom: 10 }}>AI Summary</div>
                       <div className="text-body">{selectedLead.summary}</div>
                     </div>
-                    <div className="panel-inner">
+                    <div className="lead-insight-block">
                       <div style={{ fontWeight: 800, marginBottom: 10 }}>Timeline</div>
                       {selectedLead.activity.map((item, idx) => (
-                        <div key={`${selectedLead.id}-act-${idx}`} style={{ display: 'grid', gridTemplateColumns: '80px 1fr', gap: 10, marginBottom: 10 }}>
+                        <div key={`${selectedLead.id}-act-${idx}`} className="timeline-row">
                           <div className="label-sub">{item.time.replace(/[a-z]-/g, '').replace(/\d+-/g, '')}</div>
                           <div style={{ fontSize: 13, lineHeight: 1.5 }}>{item.text}</div>
                         </div>

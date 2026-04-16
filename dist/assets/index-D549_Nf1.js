@@ -197,7 +197,7 @@ Error generating stack: `+i.message+`
       radial-gradient(circle at bottom, #0f172a 0%, #030b17 58%);
     color: var(--text-main);
     font-family: 'DM Sans', sans-serif;
-    padding: 24px;
+    padding: 40px;
   }
 
   .carlet-layout {
@@ -205,14 +205,14 @@ Error generating stack: `+i.message+`
     margin: 0 auto;
     display: grid;
     grid-template-columns: 280px 1fr;
-    gap: 18px;
+    gap: 28px;
   }
 
   .panel {
     background: var(--panel);
     border: 1px solid var(--panel-border);
     border-radius: 22px;
-    padding: 18px;
+    padding: 28px;
     box-shadow: 0 16px 40px rgba(0,0,0,0.25);
     animation: riseIn 0.3s ease-out both;
     animation-delay: var(--delay, 0ms);
@@ -222,7 +222,7 @@ Error generating stack: `+i.message+`
     background: var(--panel-soft);
     border: 1px solid var(--panel-border);
     border-radius: 22px;
-    padding: 18px;
+    padding: 22px;
     box-shadow: none;
   }
 
@@ -230,21 +230,21 @@ Error generating stack: `+i.message+`
     background: var(--panel-soft);
     border: 1px solid var(--panel-border);
     border-radius: 16px;
-    padding: 14px;
+    padding: 18px;
   }
 
   .panel-card {
     background: var(--panel-soft);
     border: 1px solid var(--panel-border);
     border-radius: 16px;
-    padding: 12px;
+    padding: 16px;
   }
 
   .sidebar {
-    padding: 16px;
+    padding: 24px;
     align-self: start;
     position: sticky;
-    top: 24px;
+    top: 40px;
   }
 
   .brand {
@@ -283,14 +283,14 @@ Error generating stack: `+i.message+`
   .sidebar-desc {
     color: #8fa1bf;
     font-size: 13px;
-    line-height: 1.5;
-    margin-bottom: 16px;
+    line-height: 1.6;
+    margin-bottom: 24px;
   }
 
   .nav-grid {
     display: grid;
-    gap: 8px;
-    margin-bottom: 18px;
+    gap: 12px;
+    margin-bottom: 24px;
   }
 
   .nav-btn {
@@ -300,7 +300,7 @@ Error generating stack: `+i.message+`
     gap: 10px;
     text-align: left;
     border-radius: 14px;
-    padding: 12px 13px;
+    padding: 14px 16px;
     font-weight: 700;
     cursor: pointer;
     font-family: inherit;
@@ -354,9 +354,9 @@ Error generating stack: `+i.message+`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 18px;
+    gap: 24px;
     flex-wrap: wrap;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
   }
 
   .header-label {
@@ -376,7 +376,8 @@ Error generating stack: `+i.message+`
 
   .header-sub {
     color: #94a3b8;
-    margin-top: 6px;
+    margin-top: 10px;
+    line-height: 1.6;
   }
 
   .btn-primary {
@@ -385,7 +386,7 @@ Error generating stack: `+i.message+`
     gap: 8px;
     border: none;
     border-radius: 14px;
-    padding: 12px 16px;
+    padding: 14px 20px;
     background: #f8fafc;
     color: #0f172a;
     font-weight: 800;
@@ -404,7 +405,7 @@ Error generating stack: `+i.message+`
     gap: 8px;
     border: 1px solid #334155;
     border-radius: 14px;
-    padding: 12px 16px;
+    padding: 14px 20px;
     background: transparent;
     color: #e5e7eb;
     font-weight: 700;
@@ -431,8 +432,8 @@ Error generating stack: `+i.message+`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 14px;
-    gap: 12px;
+    margin-bottom: 24px;
+    gap: 16px;
     flex-wrap: wrap;
   }
 
@@ -520,8 +521,8 @@ Error generating stack: `+i.message+`
     width: 100%;
     text-align: left;
     border-radius: 18px;
-    padding: 14px;
-    margin-bottom: 10px;
+    padding: 18px;
+    margin-bottom: 12px;
     cursor: pointer;
     color: #e5e7eb;
     font-family: inherit;
@@ -549,13 +550,13 @@ Error generating stack: `+i.message+`
   .inbox-grid {
     display: grid;
     grid-template-columns: 320px 1fr 320px;
-    gap: 16px;
+    gap: 24px;
   }
 
   .pipeline-grid {
     display: grid;
     grid-template-columns: repeat(5, minmax(220px, 1fr));
-    gap: 12px;
+    gap: 18px;
     overflow-x: auto;
   }
 
@@ -572,8 +573,8 @@ Error generating stack: `+i.message+`
     background: #09111f;
     border: 1px solid #1f2d44;
     border-radius: 16px;
-    padding: 12px;
-    margin-bottom: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
     cursor: pointer;
     transition: background 0.15s;
   }
@@ -583,9 +584,9 @@ Error generating stack: `+i.message+`
 
   .msg-bubble {
     max-width: 84%;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
     border-radius: 16px;
-    padding: 12px 14px;
+    padding: 14px 16px;
     border: 1px solid #26364f;
     animation: fadeIn 0.2s ease-out;
   }
@@ -642,11 +643,60 @@ Error generating stack: `+i.message+`
 
   .records-table td.wrap { white-space: normal; min-width: 150px; }
 
-  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
-  .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
-  .conv-layout { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 14px; }
-  .manager-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 16px; }
-  .react-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+  .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; }
+  .conv-layout { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px; align-items: start; }
+  .manager-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 24px; }
+  .react-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .lead-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .lead-fact {
+    min-width: 170px;
+    border: 1px solid #22324a;
+    border-radius: 12px;
+    background: rgba(9, 17, 31, 0.62);
+    padding: 10px 12px;
+  }
+
+  .lead-fact-label {
+    color: #8fa1bf;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .lead-fact-value {
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .lead-conversation {
+    padding-right: 4px;
+  }
+
+  .lead-insights {
+    display: grid;
+    gap: 18px;
+  }
+
+  .lead-insight-block {
+    border-left: 2px solid #223a59;
+    padding-left: 14px;
+  }
+
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
 
   .label-upper {
     color: #8fa1bf;
@@ -718,4 +768,4 @@ Error generating stack: `+i.message+`
       margin-bottom: 12px;
     }
   }
-`;function rt({type:e,children:t}){const n=Za[e]||Za.queued;return f.createElement("span",{className:"badge",style:{border:`1px solid ${n.border}`,background:n.bg,color:n.color}},t||e)}function vp({value:e,max:t=100}){const n=Math.max(8,Math.min(e/t*100,100));return f.createElement("div",{className:"minibar-track"},f.createElement("div",{className:"minibar-fill",style:{width:`${n}%`}}))}function qa({text:e="No leads in this stage"}){return f.createElement("div",{className:"empty-state"},e)}function Ve({icon:e,title:t}){return f.createElement("div",{style:{display:"flex",alignItems:"center",gap:10,marginBottom:14}},e&&f.createElement(e,{size:18,color:"#7dd3fc"}),f.createElement("div",{style:{fontWeight:800,fontSize:18}},t))}function wp(){const[e,t]=I.useState("executive"),[n,r]=I.useState(Nr),[l,i]=I.useState(Nr[0].id),[o,a]=I.useState(!1),[u,d]=I.useState(-1),[g,y]=I.useState(""),[h,k]=I.useState("idle"),x=I.useRef([]),S=I.useRef(!1),M=I.useMemo(()=>n.find(c=>c.id===l)||n[0],[n,l]),p=I.useMemo(()=>yp(M),[M]),s=I.useMemo(()=>n.filter(c=>c.status==="hot"),[n]),m=I.useMemo(()=>n.filter(c=>c.status==="warm"),[n]),v=I.useMemo(()=>n.filter(c=>c.status==="new"),[n]),E=I.useMemo(()=>n.filter(c=>c.status==="qualifying"),[n]),_=I.useMemo(()=>n.filter(c=>c.status==="cold"),[n]),L=I.useMemo(()=>n.filter(c=>c.financeReadiness==="Finance-ready"||c.financeReadiness==="Pre-qualified"),[n]),P=I.useMemo(()=>n.filter(c=>c.stockStatus.toLowerCase().includes("match")),[n]),$=I.useMemo(()=>n.filter(c=>c.followupStatus.toLowerCase().includes("overdue")||c.followupStatus.toLowerCase().includes("due")),[n]),D=I.useMemo(()=>new Set(n.map(c=>c.branch)).size,[n]),ge=I.useMemo(()=>[{id:"new",label:"New",leads:v},{id:"qualifying",label:"Qualifying",leads:E},{id:"hot",label:"Hot",leads:s},{id:"warm",label:"Warm",leads:m},{id:"cold",label:"Reactivation",leads:_}],[v,E,s,m,_]),et=I.useMemo(()=>{const c={};return n.forEach(z=>{c[z.assigned]||(c[z.assigned]={active:0,hot:0}),c[z.assigned].active++,z.status==="hot"&&c[z.assigned].hot++}),["Athira","Shihas","Anusha","Abhilash"].map(z=>{var ne,Ce;return{name:z,active:((ne=c[z])==null?void 0:ne.active)||0,hot:((Ce=c[z])==null?void 0:Ce.hot)||0}})},[n]),tt=I.useMemo(()=>{const c={};return n.forEach(T=>{const z=T.channel;c[z]=(c[z]||0)+1}),c},[n]);I.useEffect(()=>()=>x.current.forEach(c=>clearTimeout(c)),[]),I.useEffect(()=>{if(!g){k("idle");return}k("entering");const c=window.setTimeout(()=>k("exiting"),1300),T=window.setTimeout(()=>{y(""),k("idle")},1600);return()=>{clearTimeout(c),clearTimeout(T)}},[g]);const yn=I.useCallback(()=>{x.current.forEach(c=>clearTimeout(c)),x.current=[]},[]),gn=I.useCallback(()=>{yn(),S.current=!1,r(Nr),i(Nr[0].id),a(!1),d(-1),y(""),k("idle")},[yn]),Et=I.useCallback(c=>{r(T=>T.map(z=>z.id==="LD-1088"?c(z):z))},[]),Ut=I.useCallback((c,T)=>{S.current&&(d(T),c.type==="createLead"&&(r(z=>z.some(ne=>ne.id===c.payload.id)?z:[c.payload,...z]),i(c.payload.id)),c.type==="appendMessage"&&Et(z=>({...z,lastSeen:"just now",messages:[...z.messages,c.payload]})),c.type==="updateLead"&&Et(z=>{const{activityEntry:ne,...Ce}=c.payload;return{...z,...Ce,activity:ne?[{time:hp(),text:ne.text},...z.activity]:z.activity}}),c.toast&&y(c.toast))},[Et]),C=I.useCallback(()=>{gn(),Promise.resolve().then(()=>{S.current=!0,t("inbox"),a(!0);let c=200;ql.forEach((T,z)=>{c+=T.delay;const ne=window.setTimeout(()=>{Ut(T,z),z===ql.length-1&&(a(!1),S.current=!1)},c);x.current.push(ne)})})},[gn,Ut]),R=I.useCallback((c,T)=>{(c.key==="Enter"||c.key===" ")&&(c.preventDefault(),T())},[]);return f.createElement("div",{className:"carlet-root"},f.createElement("style",null,gp),f.createElement("div",{className:"carlet-layout"},f.createElement("aside",{className:"panel sidebar",style:{"--delay":"40ms"}},f.createElement("div",{className:"brand"},f.createElement("div",{className:"brand-mark"},f.createElement(Yf,{size:20,strokeWidth:2.4})),f.createElement("div",null,f.createElement("div",{className:"sidebar-label"},"YEL6AI OS"),f.createElement("div",{className:"sidebar-title"},"Carlet"))),f.createElement("div",{className:"sidebar-desc"},"Operational control system for lead capture, qualification, sales routing, stock matching, and reactivation."),f.createElement("nav",{className:"nav-grid","aria-label":"Main navigation"},pp.map(c=>f.createElement("button",{key:c.id,onClick:()=>t(c.id),className:`nav-btn ${e===c.id?"nav-btn--active":"nav-btn--inactive"}`,"aria-current":e===c.id?"page":void 0},f.createElement("span",{className:"nav-btn-label"},f.createElement(c.icon,{className:"nav-btn-icon"}),c.label),f.createElement(Zf,{size:16,className:"nav-btn-arrow"}))))),f.createElement("main",null,f.createElement("div",{className:"utility-row"},f.createElement("label",{className:"search-shell","aria-label":"Search leads"},f.createElement(op,{size:16,color:"#93c5fd"}),f.createElement("input",{type:"text",value:"",readOnly:!0,placeholder:"Search lead, vehicle, branch"})),f.createElement("div",{className:"utility-actions"},f.createElement("button",{className:"icon-btn","aria-label":"Notifications"},f.createElement(Hf,{size:17})),f.createElement("div",{className:"profile-chip"},f.createElement("span",{className:"profile-dot"})," Operations Online"))),f.createElement("div",{className:"header-row"},f.createElement("div",null,f.createElement("div",{className:"header-label"},"YEL6AI · Carlet Workspace"),f.createElement("div",{className:"header-title"},"Lead Command Center"),f.createElement("div",{className:"header-sub"},"Used-car lead operating system for faster response, finance-ready buyers, branch visibility, and zero lead leakage.")),f.createElement("div",{style:{display:"flex",gap:10,flexWrap:"wrap"}},f.createElement("button",{onClick:C,className:"btn-primary",disabled:o},f.createElement(tp,{size:16}),o?"Running…":"Play Live Demo"),f.createElement("button",{onClick:gn,className:"btn-secondary"},f.createElement(lp,{size:16}),"Reset"))),g&&f.createElement("div",{className:`panel toast ${h==="entering"?"toast--entering":""} ${h==="exiting"?"toast--exiting":""}`,role:"status","aria-live":"polite"},g),e==="executive"&&f.createElement("section",{className:"panel","aria-label":"Executive Summary",style:{"--delay":"70ms"}},f.createElement(Ve,{icon:dc,title:"Executive Summary"}),f.createElement("div",{className:"stat-grid"},[{title:"Finance-Ready Buyers",value:L.length,sub:"ready to push into close",tone:"finance"},{title:"Stock-Matched Enquiries",value:P.length,sub:"inventory aligned in system",tone:"live"},{title:"Follow-Ups Due / Overdue",value:$.length,sub:"needs attention",tone:"risk"},{title:"Branches with Live Demand",value:D,sub:"distribution across operations",tone:"queued"}].map(c=>f.createElement("div",{key:c.title,className:"panel-inner",style:{padding:16}},f.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",gap:8}},f.createElement("div",{style:{fontWeight:800,fontSize:14}},c.title),f.createElement(rt,{type:c.tone})),f.createElement("div",{style:{fontSize:34,fontWeight:800,marginTop:12}},c.value),f.createElement("div",{className:"text-muted",style:{marginTop:8,fontSize:13}},c.sub))))),e==="inbox"&&f.createElement("section",{className:"inbox-grid","aria-label":"Lead Inbox"},f.createElement("div",{className:"panel",style:{"--delay":"70ms"}},f.createElement(Ve,{icon:cc,title:"Active Leads"}),n.length===0&&f.createElement(qa,{text:"No active leads"}),n.map(c=>f.createElement("button",{key:c.id,onClick:()=>i(c.id),className:`lead-card ${l===c.id?"lead-card--selected":"lead-card--default"} ${c.id==="LD-1088"&&o?"lead-card--pulse":""}`,"aria-pressed":l===c.id},f.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",gap:10}},f.createElement("div",{style:{fontWeight:700}},c.name),f.createElement(rt,{type:c.status})),f.createElement("div",{className:"label-sub",style:{marginTop:6}},c.channel," · ",c.lastSeen),f.createElement("div",{style:{marginTop:8}},c.interest)))),f.createElement("div",{className:"panel",style:{"--delay":"110ms"}},f.createElement("div",{style:{display:"flex",justifyContent:"space-between",gap:10,alignItems:"center",marginBottom:16,flexWrap:"wrap"}},f.createElement("div",null,f.createElement("div",{style:{fontSize:24,fontWeight:800}},M.name),f.createElement("div",{className:"label-sub",style:{marginTop:4}},M.id," · ",M.phone," · ",M.source)),f.createElement("div",{style:{display:"flex",gap:8,flexWrap:"wrap"}},f.createElement(rt,{type:M.status}),f.createElement(rt,{type:"finance"},M.financeReadiness),f.createElement(rt,{type:"risk"},M.riskLevel))),f.createElement("div",{className:"detail-grid",style:{marginBottom:16}},[["Vehicle",M.interest],["Budget",M.budget],["Location",M.location],["Finance",M.finance],["Timeline",M.timeline],["Branch",M.branch],["Stock",M.stockStatus],["Follow-Up",M.followupStatus]].map(([c,T])=>f.createElement("div",{key:c,className:"panel-card"},f.createElement("div",{className:"label-upper"},c),f.createElement("div",{style:{marginTop:8,fontSize:14,lineHeight:1.4}},T)))),f.createElement("div",{className:"conv-layout"},f.createElement("div",{className:"panel-inner"},f.createElement("div",{style:{fontWeight:800,marginBottom:12}},"Conversation"),M.messages.map((c,T)=>f.createElement("div",{key:`${M.id}-msg-${T}`,className:`msg-bubble ${c.from==="ai"?"msg-bubble--ai":"msg-bubble--customer"}`},f.createElement("div",{className:"label-upper",style:{marginBottom:6}},c.from==="ai"?"YEL6AI":"Customer"),f.createElement("div",{style:{lineHeight:1.55}},c.text))),o&&M.id==="LD-1088"&&u<ql.length-1&&f.createElement("div",{className:"msg-typing"},"typing…")),f.createElement("div",{style:{display:"grid",gap:14}},f.createElement("div",{className:"panel-inner"},f.createElement("div",{style:{fontWeight:800,marginBottom:10}},"AI Summary"),f.createElement("div",{className:"text-body"},M.summary)),f.createElement("div",{className:"panel-inner"},f.createElement("div",{style:{fontWeight:800,marginBottom:10}},"Timeline"),M.activity.map((c,T)=>f.createElement("div",{key:`${M.id}-act-${T}`,style:{display:"grid",gridTemplateColumns:"80px 1fr",gap:10,marginBottom:10}},f.createElement("div",{className:"label-sub"},c.time.replace(/[a-z]-/g,"").replace(/\d+-/g,"")),f.createElement("div",{style:{fontSize:13,lineHeight:1.5}},c.text))))))),f.createElement("div",{className:"panel",style:{"--delay":"150ms"}},f.createElement(Ve,{icon:up,title:"Sales Action Panel"}),[["Owner",p.owner],["Priority",p.priority],["Recommended Action",p.action],["SLA",p.sla]].map(([c,T])=>f.createElement("div",{key:c,className:"panel-sm",style:{marginBottom:12}},f.createElement("div",{className:"label-upper"},c),f.createElement("div",{style:{marginTop:8,lineHeight:1.5}},T))))),e==="pipeline"&&f.createElement("section",{className:"panel","aria-label":"Pipeline Board",style:{"--delay":"70ms"}},f.createElement(Ve,{icon:pc,title:"Pipeline Board"}),f.createElement("div",{className:"pipeline-grid"},ge.map(c=>{const T=o&&(c.id==="new"&&u<=0||c.id==="qualifying"&&u>=1&&u<=5||c.id==="hot"&&u>=6);return f.createElement("div",{key:c.id,className:`panel-inner pipeline-col ${T?"pipeline-col--active":""}`},f.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}},f.createElement("div",{style:{fontWeight:800}},c.label),f.createElement(rt,{type:c.id==="cold"?"queued":c.id},c.leads.length)),f.createElement(vp,{value:c.leads.length*20}),c.leads.length===0&&f.createElement(qa,null),c.leads.map(z=>f.createElement("div",{key:z.id,className:"pipeline-item",onClick:()=>{i(z.id),t("inbox")},onKeyDown:ne=>R(ne,()=>{i(z.id),t("inbox")}),tabIndex:0,role:"button","aria-label":`View ${z.name}`},f.createElement("div",{style:{fontWeight:700,fontSize:14}},z.name),f.createElement("div",{className:"label-sub",style:{marginTop:4}},z.interest),f.createElement("div",{style:{marginTop:8,display:"flex",justifyContent:"space-between",fontSize:12},className:"text-muted"},f.createElement("span",null,z.channel),f.createElement("span",null,"Score ",z.score)))))}))),e==="records"&&f.createElement("section",{className:"panel","aria-label":"Lead Records",style:{"--delay":"70ms"}},f.createElement(Ve,{icon:sc,title:"Master Lead Records"}),f.createElement("div",{style:{overflowX:"auto"}},f.createElement("table",{className:"records-table"},f.createElement("thead",null,f.createElement("tr",null,["Lead ID","Name","Channel","Vehicle","Budget","Location","Finance","Timeline","Score","Status","Owner","Branch","Stock","Follow-Up","Next Action"].map(c=>f.createElement("th",{key:c},c)))),f.createElement("tbody",null,n.length===0&&f.createElement("tr",null,f.createElement("td",{colSpan:15,style:{textAlign:"center",padding:40,color:"#475569",fontStyle:"italic"}},"No leads found")),n.map(c=>f.createElement("tr",{key:c.id,onClick:()=>{i(c.id),t("inbox")},onKeyDown:T=>R(T,()=>{i(c.id),t("inbox")}),tabIndex:0,role:"button","aria-label":`View lead ${c.name}`},f.createElement("td",null,c.id),f.createElement("td",null,c.name),f.createElement("td",null,c.channel),f.createElement("td",{className:"wrap"},c.interest),f.createElement("td",null,c.budget),f.createElement("td",null,c.location),f.createElement("td",null,c.finance),f.createElement("td",null,c.timeline),f.createElement("td",null,c.score),f.createElement("td",null,f.createElement(rt,{type:c.status})),f.createElement("td",null,c.assigned),f.createElement("td",null,c.branch),f.createElement("td",null,c.stockStatus),f.createElement("td",null,c.followupStatus),f.createElement("td",{className:"wrap"},c.nextAction))))))),e==="manager"&&f.createElement("section",{className:"manager-grid","aria-label":"Manager View"},f.createElement("div",{className:"panel",style:{"--delay":"70ms"}},f.createElement(Ve,{icon:Kf,title:"Manager Overview"}),f.createElement("div",{className:"stat-grid",style:{marginBottom:14}},[["Instagram",`${tt.Instagram||0} leads`,"From DM campaigns"],["WhatsApp",`${tt.WhatsApp||0} leads`,"Inbound enquiries"],["Finance-Ready",String(L.length),"ready for faster close"],["Sales Load",`${n.length} total`,`Across ${et.filter(c=>c.active>0).length} reps`]].map(([c,T,z])=>f.createElement("div",{key:c,className:"panel-sm"},f.createElement("div",{className:"label-sub"},c),f.createElement("div",{style:{fontSize:28,fontWeight:800,marginTop:8}},T),f.createElement("div",{className:"text-muted",style:{marginTop:6,fontSize:13}},z))))),f.createElement("div",{className:"panel",style:{"--delay":"110ms"}},f.createElement(Ve,{icon:mc,title:"Team Queue"}),et.map(c=>f.createElement("div",{key:c.name,className:"panel-sm",style:{marginBottom:10}},f.createElement("div",{style:{fontWeight:700}},c.name),f.createElement("div",{className:"label-sub",style:{marginTop:6}},c.active," active"),f.createElement("div",{style:{marginTop:6,fontSize:13}},c.hot," hot lead",c.hot!==1?"s":""))))),e==="reactivation"&&f.createElement("section",{className:"react-grid","aria-label":"Reactivation Queue"},f.createElement("div",{className:"panel",style:{"--delay":"70ms"}},f.createElement(Ve,{icon:fc,title:"Reactivation Queue"}),mp.map((c,T)=>f.createElement("div",{key:`react-${T}`,className:"panel-sm",style:{marginBottom:10}},f.createElement("div",{style:{display:"flex",justifyContent:"space-between",gap:10,alignItems:"center"}},f.createElement("div",{style:{fontWeight:700}},c.name),f.createElement(rt,{type:"queued"},c.status)),f.createElement("div",{className:"label-sub",style:{marginTop:6}},c.vehicle),f.createElement("div",{style:{marginTop:8,fontSize:14}},c.stage," · ",c.sendAt)))),f.createElement("div",{className:"panel",style:{"--delay":"110ms"}},f.createElement(Ve,{icon:cp,title:"Outgoing Message Preview"}),f.createElement("div",{className:"panel-inner",style:{lineHeight:1.8}},"Hi Fahad — sharing this because you had asked about Baleno earlier. We currently have a few matching options and can also help if finance support is needed. Are you still looking, or should I share the best available choices for your budget?"))),f.createElement("div",{className:"panel-inner",style:{marginTop:16}},f.createElement("div",{style:{fontWeight:800,marginBottom:8}},"Smoke checks"),f.createElement("div",{className:"smoke-item"},"• Canvas preview loads without syntax errors"),f.createElement("div",{className:"smoke-item"},"• Play Live Demo creates LD-1088 and updates it through qualification"),f.createElement("div",{className:"smoke-item"},"• Navigation switches between all tabs"),f.createElement("div",{className:"smoke-item"},"• Clicking a row in Lead Records opens that lead in Lead Inbox")))))}Jl.createRoot(document.getElementById("root")).render(f.createElement(f.StrictMode,null,f.createElement(wp,null)));
+`;function rt({type:e,children:t}){const n=Za[e]||Za.queued;return f.createElement("span",{className:"badge",style:{border:`1px solid ${n.border}`,background:n.bg,color:n.color}},t||e)}function vp({value:e,max:t=100}){const n=Math.max(8,Math.min(e/t*100,100));return f.createElement("div",{className:"minibar-track"},f.createElement("div",{className:"minibar-fill",style:{width:`${n}%`}}))}function qa({text:e="No leads in this stage"}){return f.createElement("div",{className:"empty-state"},e)}function Ve({icon:e,title:t}){return f.createElement("div",{style:{display:"flex",alignItems:"center",gap:10,marginBottom:14}},e&&f.createElement(e,{size:18,color:"#7dd3fc"}),f.createElement("div",{style:{fontWeight:800,fontSize:18}},t))}function wp(){const[e,t]=I.useState("executive"),[n,r]=I.useState(Nr),[l,i]=I.useState(Nr[0].id),[o,a]=I.useState(!1),[u,d]=I.useState(-1),[g,y]=I.useState(""),[h,k]=I.useState("idle"),x=I.useRef([]),S=I.useRef(!1),M=I.useMemo(()=>n.find(c=>c.id===l)||n[0],[n,l]),p=I.useMemo(()=>yp(M),[M]),s=I.useMemo(()=>n.filter(c=>c.status==="hot"),[n]),m=I.useMemo(()=>n.filter(c=>c.status==="warm"),[n]),v=I.useMemo(()=>n.filter(c=>c.status==="new"),[n]),E=I.useMemo(()=>n.filter(c=>c.status==="qualifying"),[n]),_=I.useMemo(()=>n.filter(c=>c.status==="cold"),[n]),L=I.useMemo(()=>n.filter(c=>c.financeReadiness==="Finance-ready"||c.financeReadiness==="Pre-qualified"),[n]),P=I.useMemo(()=>n.filter(c=>c.stockStatus.toLowerCase().includes("match")),[n]),$=I.useMemo(()=>n.filter(c=>c.followupStatus.toLowerCase().includes("overdue")||c.followupStatus.toLowerCase().includes("due")),[n]),D=I.useMemo(()=>new Set(n.map(c=>c.branch)).size,[n]),ge=I.useMemo(()=>[{id:"new",label:"New",leads:v},{id:"qualifying",label:"Qualifying",leads:E},{id:"hot",label:"Hot",leads:s},{id:"warm",label:"Warm",leads:m},{id:"cold",label:"Reactivation",leads:_}],[v,E,s,m,_]),et=I.useMemo(()=>{const c={};return n.forEach(z=>{c[z.assigned]||(c[z.assigned]={active:0,hot:0}),c[z.assigned].active++,z.status==="hot"&&c[z.assigned].hot++}),["Athira","Shihas","Anusha","Abhilash"].map(z=>{var ne,Ce;return{name:z,active:((ne=c[z])==null?void 0:ne.active)||0,hot:((Ce=c[z])==null?void 0:Ce.hot)||0}})},[n]),tt=I.useMemo(()=>{const c={};return n.forEach(T=>{const z=T.channel;c[z]=(c[z]||0)+1}),c},[n]);I.useEffect(()=>()=>x.current.forEach(c=>clearTimeout(c)),[]),I.useEffect(()=>{if(!g){k("idle");return}k("entering");const c=window.setTimeout(()=>k("exiting"),1300),T=window.setTimeout(()=>{y(""),k("idle")},1600);return()=>{clearTimeout(c),clearTimeout(T)}},[g]);const yn=I.useCallback(()=>{x.current.forEach(c=>clearTimeout(c)),x.current=[]},[]),gn=I.useCallback(()=>{yn(),S.current=!1,r(Nr),i(Nr[0].id),a(!1),d(-1),y(""),k("idle")},[yn]),Et=I.useCallback(c=>{r(T=>T.map(z=>z.id==="LD-1088"?c(z):z))},[]),Ut=I.useCallback((c,T)=>{S.current&&(d(T),c.type==="createLead"&&(r(z=>z.some(ne=>ne.id===c.payload.id)?z:[c.payload,...z]),i(c.payload.id)),c.type==="appendMessage"&&Et(z=>({...z,lastSeen:"just now",messages:[...z.messages,c.payload]})),c.type==="updateLead"&&Et(z=>{const{activityEntry:ne,...Ce}=c.payload;return{...z,...Ce,activity:ne?[{time:hp(),text:ne.text},...z.activity]:z.activity}}),c.toast&&y(c.toast))},[Et]),C=I.useCallback(()=>{gn(),Promise.resolve().then(()=>{S.current=!0,t("inbox"),a(!0);let c=200;ql.forEach((T,z)=>{c+=T.delay;const ne=window.setTimeout(()=>{Ut(T,z),z===ql.length-1&&(a(!1),S.current=!1)},c);x.current.push(ne)})})},[gn,Ut]),R=I.useCallback((c,T)=>{(c.key==="Enter"||c.key===" ")&&(c.preventDefault(),T())},[]);return f.createElement("div",{className:"carlet-root"},f.createElement("style",null,gp),f.createElement("div",{className:"carlet-layout"},f.createElement("aside",{className:"panel sidebar",style:{"--delay":"40ms"}},f.createElement("div",{className:"brand"},f.createElement("div",{className:"brand-mark"},f.createElement(Yf,{size:20,strokeWidth:2.4})),f.createElement("div",null,f.createElement("div",{className:"sidebar-label"},"YEL6AI OS"),f.createElement("div",{className:"sidebar-title"},"Carlet"))),f.createElement("div",{className:"sidebar-desc"},"Operational control system for lead capture, qualification, sales routing, stock matching, and reactivation."),f.createElement("nav",{className:"nav-grid","aria-label":"Main navigation"},pp.map(c=>f.createElement("button",{key:c.id,onClick:()=>t(c.id),className:`nav-btn ${e===c.id?"nav-btn--active":"nav-btn--inactive"}`,"aria-current":e===c.id?"page":void 0},f.createElement("span",{className:"nav-btn-label"},f.createElement(c.icon,{className:"nav-btn-icon"}),c.label),f.createElement(Zf,{size:16,className:"nav-btn-arrow"}))))),f.createElement("main",null,f.createElement("div",{className:"utility-row"},f.createElement("label",{className:"search-shell","aria-label":"Search leads"},f.createElement(op,{size:16,color:"#93c5fd"}),f.createElement("input",{type:"text",value:"",readOnly:!0,placeholder:"Search lead, vehicle, branch"})),f.createElement("div",{className:"utility-actions"},f.createElement("button",{className:"icon-btn","aria-label":"Notifications"},f.createElement(Hf,{size:17})),f.createElement("div",{className:"profile-chip"},f.createElement("span",{className:"profile-dot"})," Operations Online"))),f.createElement("div",{className:"header-row"},f.createElement("div",null,f.createElement("div",{className:"header-label"},"YEL6AI · Carlet Workspace"),f.createElement("div",{className:"header-title"},"Lead Command Center"),f.createElement("div",{className:"header-sub"},"Used-car lead operating system for faster response, finance-ready buyers, branch visibility, and zero lead leakage.")),f.createElement("div",{style:{display:"flex",gap:10,flexWrap:"wrap"}},f.createElement("button",{onClick:C,className:"btn-primary",disabled:o},f.createElement(tp,{size:16}),o?"Running…":"Play Live Demo"),f.createElement("button",{onClick:gn,className:"btn-secondary"},f.createElement(lp,{size:16}),"Reset"))),g&&f.createElement("div",{className:`panel toast ${h==="entering"?"toast--entering":""} ${h==="exiting"?"toast--exiting":""}`,role:"status","aria-live":"polite"},g),e==="executive"&&f.createElement("section",{className:"panel","aria-label":"Executive Summary",style:{"--delay":"70ms"}},f.createElement(Ve,{icon:dc,title:"Executive Summary"}),f.createElement("div",{className:"stat-grid"},[{title:"Finance-Ready Buyers",value:L.length,sub:"ready to push into close",tone:"finance"},{title:"Stock-Matched Enquiries",value:P.length,sub:"inventory aligned in system",tone:"live"},{title:"Follow-Ups Due / Overdue",value:$.length,sub:"needs attention",tone:"risk"},{title:"Branches with Live Demand",value:D,sub:"distribution across operations",tone:"queued"}].map(c=>f.createElement("div",{key:c.title,className:"panel-inner",style:{padding:16}},f.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",gap:8}},f.createElement("div",{style:{fontWeight:800,fontSize:14}},c.title),f.createElement(rt,{type:c.tone})),f.createElement("div",{style:{fontSize:34,fontWeight:800,marginTop:12}},c.value),f.createElement("div",{className:"text-muted",style:{marginTop:8,fontSize:13}},c.sub))))),e==="inbox"&&f.createElement("section",{className:"inbox-grid","aria-label":"Lead Inbox"},f.createElement("div",{className:"panel",style:{"--delay":"70ms"}},f.createElement(Ve,{icon:cc,title:"Active Leads"}),n.length===0&&f.createElement(qa,{text:"No active leads"}),n.map(c=>f.createElement("button",{key:c.id,onClick:()=>i(c.id),className:`lead-card ${l===c.id?"lead-card--selected":"lead-card--default"} ${c.id==="LD-1088"&&o?"lead-card--pulse":""}`,"aria-pressed":l===c.id},f.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",gap:10}},f.createElement("div",{style:{fontWeight:700}},c.name),f.createElement(rt,{type:c.status})),f.createElement("div",{className:"label-sub",style:{marginTop:6}},c.channel," · ",c.lastSeen),f.createElement("div",{style:{marginTop:8}},c.interest)))),f.createElement("div",{className:"panel",style:{"--delay":"110ms"}},f.createElement("div",{style:{display:"flex",justifyContent:"space-between",gap:10,alignItems:"center",marginBottom:16,flexWrap:"wrap"}},f.createElement("div",null,f.createElement("div",{style:{fontSize:24,fontWeight:800}},M.name),f.createElement("div",{className:"label-sub",style:{marginTop:4}},M.id," · ",M.phone," · ",M.source)),f.createElement("div",{style:{display:"flex",gap:8,flexWrap:"wrap"}},f.createElement(rt,{type:M.status}),f.createElement(rt,{type:"finance"},M.financeReadiness),f.createElement(rt,{type:"risk"},M.riskLevel))),f.createElement("div",{className:"lead-facts"},[["Vehicle",M.interest],["Budget",M.budget],["Location",M.location],["Finance",M.finance],["Timeline",M.timeline],["Branch",M.branch],["Stock",M.stockStatus],["Follow-Up",M.followupStatus]].map(([c,T])=>f.createElement("div",{key:c,className:"lead-fact"},f.createElement("div",{className:"lead-fact-label"},c),f.createElement("div",{className:"lead-fact-value"},T)))),f.createElement("div",{className:"conv-layout"},f.createElement("div",{className:"lead-conversation"},f.createElement("div",{style:{fontWeight:800,marginBottom:12}},"Conversation"),M.messages.map((c,T)=>f.createElement("div",{key:`${M.id}-msg-${T}`,className:`msg-bubble ${c.from==="ai"?"msg-bubble--ai":"msg-bubble--customer"}`},f.createElement("div",{className:"label-upper",style:{marginBottom:6}},c.from==="ai"?"YEL6AI":"Customer"),f.createElement("div",{style:{lineHeight:1.55}},c.text))),o&&M.id==="LD-1088"&&u<ql.length-1&&f.createElement("div",{className:"msg-typing"},"typing…")),f.createElement("div",{className:"lead-insights"},f.createElement("div",{className:"lead-insight-block"},f.createElement("div",{style:{fontWeight:800,marginBottom:10}},"AI Summary"),f.createElement("div",{className:"text-body"},M.summary)),f.createElement("div",{className:"lead-insight-block"},f.createElement("div",{style:{fontWeight:800,marginBottom:10}},"Timeline"),M.activity.map((c,T)=>f.createElement("div",{key:`${M.id}-act-${T}`,className:"timeline-row"},f.createElement("div",{className:"label-sub"},c.time.replace(/[a-z]-/g,"").replace(/\d+-/g,"")),f.createElement("div",{style:{fontSize:13,lineHeight:1.5}},c.text))))))),f.createElement("div",{className:"panel",style:{"--delay":"150ms"}},f.createElement(Ve,{icon:up,title:"Sales Action Panel"}),[["Owner",p.owner],["Priority",p.priority],["Recommended Action",p.action],["SLA",p.sla]].map(([c,T])=>f.createElement("div",{key:c,className:"panel-sm",style:{marginBottom:12}},f.createElement("div",{className:"label-upper"},c),f.createElement("div",{style:{marginTop:8,lineHeight:1.5}},T))))),e==="pipeline"&&f.createElement("section",{className:"panel","aria-label":"Pipeline Board",style:{"--delay":"70ms"}},f.createElement(Ve,{icon:pc,title:"Pipeline Board"}),f.createElement("div",{className:"pipeline-grid"},ge.map(c=>{const T=o&&(c.id==="new"&&u<=0||c.id==="qualifying"&&u>=1&&u<=5||c.id==="hot"&&u>=6);return f.createElement("div",{key:c.id,className:`panel-inner pipeline-col ${T?"pipeline-col--active":""}`},f.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}},f.createElement("div",{style:{fontWeight:800}},c.label),f.createElement(rt,{type:c.id==="cold"?"queued":c.id},c.leads.length)),f.createElement(vp,{value:c.leads.length*20}),c.leads.length===0&&f.createElement(qa,null),c.leads.map(z=>f.createElement("div",{key:z.id,className:"pipeline-item",onClick:()=>{i(z.id),t("inbox")},onKeyDown:ne=>R(ne,()=>{i(z.id),t("inbox")}),tabIndex:0,role:"button","aria-label":`View ${z.name}`},f.createElement("div",{style:{fontWeight:700,fontSize:14}},z.name),f.createElement("div",{className:"label-sub",style:{marginTop:4}},z.interest),f.createElement("div",{style:{marginTop:8,display:"flex",justifyContent:"space-between",fontSize:12},className:"text-muted"},f.createElement("span",null,z.channel),f.createElement("span",null,"Score ",z.score)))))}))),e==="records"&&f.createElement("section",{className:"panel","aria-label":"Lead Records",style:{"--delay":"70ms"}},f.createElement(Ve,{icon:sc,title:"Master Lead Records"}),f.createElement("div",{style:{overflowX:"auto"}},f.createElement("table",{className:"records-table"},f.createElement("thead",null,f.createElement("tr",null,["Lead ID","Name","Channel","Vehicle","Budget","Location","Finance","Timeline","Score","Status","Owner","Branch","Stock","Follow-Up","Next Action"].map(c=>f.createElement("th",{key:c},c)))),f.createElement("tbody",null,n.length===0&&f.createElement("tr",null,f.createElement("td",{colSpan:15,style:{textAlign:"center",padding:40,color:"#475569",fontStyle:"italic"}},"No leads found")),n.map(c=>f.createElement("tr",{key:c.id,onClick:()=>{i(c.id),t("inbox")},onKeyDown:T=>R(T,()=>{i(c.id),t("inbox")}),tabIndex:0,role:"button","aria-label":`View lead ${c.name}`},f.createElement("td",null,c.id),f.createElement("td",null,c.name),f.createElement("td",null,c.channel),f.createElement("td",{className:"wrap"},c.interest),f.createElement("td",null,c.budget),f.createElement("td",null,c.location),f.createElement("td",null,c.finance),f.createElement("td",null,c.timeline),f.createElement("td",null,c.score),f.createElement("td",null,f.createElement(rt,{type:c.status})),f.createElement("td",null,c.assigned),f.createElement("td",null,c.branch),f.createElement("td",null,c.stockStatus),f.createElement("td",null,c.followupStatus),f.createElement("td",{className:"wrap"},c.nextAction))))))),e==="manager"&&f.createElement("section",{className:"manager-grid","aria-label":"Manager View"},f.createElement("div",{className:"panel",style:{"--delay":"70ms"}},f.createElement(Ve,{icon:Kf,title:"Manager Overview"}),f.createElement("div",{className:"stat-grid",style:{marginBottom:14}},[["Instagram",`${tt.Instagram||0} leads`,"From DM campaigns"],["WhatsApp",`${tt.WhatsApp||0} leads`,"Inbound enquiries"],["Finance-Ready",String(L.length),"ready for faster close"],["Sales Load",`${n.length} total`,`Across ${et.filter(c=>c.active>0).length} reps`]].map(([c,T,z])=>f.createElement("div",{key:c,className:"panel-sm"},f.createElement("div",{className:"label-sub"},c),f.createElement("div",{style:{fontSize:28,fontWeight:800,marginTop:8}},T),f.createElement("div",{className:"text-muted",style:{marginTop:6,fontSize:13}},z))))),f.createElement("div",{className:"panel",style:{"--delay":"110ms"}},f.createElement(Ve,{icon:mc,title:"Team Queue"}),et.map(c=>f.createElement("div",{key:c.name,className:"panel-sm",style:{marginBottom:10}},f.createElement("div",{style:{fontWeight:700}},c.name),f.createElement("div",{className:"label-sub",style:{marginTop:6}},c.active," active"),f.createElement("div",{style:{marginTop:6,fontSize:13}},c.hot," hot lead",c.hot!==1?"s":""))))),e==="reactivation"&&f.createElement("section",{className:"react-grid","aria-label":"Reactivation Queue"},f.createElement("div",{className:"panel",style:{"--delay":"70ms"}},f.createElement(Ve,{icon:fc,title:"Reactivation Queue"}),mp.map((c,T)=>f.createElement("div",{key:`react-${T}`,className:"panel-sm",style:{marginBottom:10}},f.createElement("div",{style:{display:"flex",justifyContent:"space-between",gap:10,alignItems:"center"}},f.createElement("div",{style:{fontWeight:700}},c.name),f.createElement(rt,{type:"queued"},c.status)),f.createElement("div",{className:"label-sub",style:{marginTop:6}},c.vehicle),f.createElement("div",{style:{marginTop:8,fontSize:14}},c.stage," · ",c.sendAt)))),f.createElement("div",{className:"panel",style:{"--delay":"110ms"}},f.createElement(Ve,{icon:cp,title:"Outgoing Message Preview"}),f.createElement("div",{className:"panel-inner",style:{lineHeight:1.8}},"Hi Fahad — sharing this because you had asked about Baleno earlier. We currently have a few matching options and can also help if finance support is needed. Are you still looking, or should I share the best available choices for your budget?"))),f.createElement("div",{className:"panel-inner",style:{marginTop:16}},f.createElement("div",{style:{fontWeight:800,marginBottom:8}},"Smoke checks"),f.createElement("div",{className:"smoke-item"},"• Canvas preview loads without syntax errors"),f.createElement("div",{className:"smoke-item"},"• Play Live Demo creates LD-1088 and updates it through qualification"),f.createElement("div",{className:"smoke-item"},"• Navigation switches between all tabs"),f.createElement("div",{className:"smoke-item"},"• Clicking a row in Lead Records opens that lead in Lead Inbox")))))}Jl.createRoot(document.getElementById("root")).render(f.createElement(f.StrictMode,null,f.createElement(wp,null)));
