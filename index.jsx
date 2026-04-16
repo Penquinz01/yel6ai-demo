@@ -220,6 +220,14 @@ const STYLES = `
     to { opacity: 1; }
   }
 
+  html, body, #root {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #020617;
+  }
+
   * { box-sizing: border-box; }
 
   .carlet-root {
