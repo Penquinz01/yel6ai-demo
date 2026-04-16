@@ -151,7 +151,7 @@ Error generating stack: `+i.message+`
     --accent-2: #bbf7d0;
     --text-main: #f3f4f6;
     --text-soft: #cbd5e1;
-    --panel-motion: 420ms;
+    --panel-motion: 680ms;
     --panel-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
@@ -204,9 +204,8 @@ Error generating stack: `+i.message+`
     margin: 0;
     min-height: 100vh;
     display: grid;
-    grid-template-columns: var(--sidebar-width, 280px) minmax(0, 1fr);
+    grid-template-columns: auto minmax(0, 1fr);
     gap: 0;
-    transition: grid-template-columns var(--panel-motion) var(--panel-ease);
   }
 
   .carlet-layout.sidebar-collapsed {
@@ -254,6 +253,8 @@ Error generating stack: `+i.message+`
   }
 
   .side-panel {
+    width: var(--sidebar-width, 280px);
+    min-width: var(--sidebar-width, 280px);
     min-height: 100vh;
     border-radius: 0;
     border-top: none;
@@ -263,6 +264,7 @@ Error generating stack: `+i.message+`
     background: #060606;
     position: relative;
     overflow: visible;
+    transition: width var(--panel-motion) var(--panel-ease), min-width var(--panel-motion) var(--panel-ease);
   }
 
   .sidebar-top {
@@ -482,8 +484,8 @@ Error generating stack: `+i.message+`
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .carlet-layout,
     .sidebar,
+    .side-panel,
     .sidebar-desc,
     .brand-meta,
     .nav-btn-text,
@@ -925,6 +927,8 @@ Error generating stack: `+i.message+`
     }
 
     .side-panel {
+      width: auto;
+      min-width: 0;
       min-height: auto;
       border-right: 1px solid var(--panel-border);
     }
