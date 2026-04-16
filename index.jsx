@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import {
   Bell,
   Building2,
+  Car,
   ChevronRight,
   Database,
   Inbox,
@@ -188,9 +189,9 @@ const liveScenario = [
 ];
 
 const BADGE_COLORS = {
-  hot: { bg: '#18181b', color: '#f4f4f5', border: '#52525b' },
-  warm: { bg: '#1c1c1f', color: '#e4e4e7', border: '#4b5563' },
-  cold: { bg: '#111111', color: '#d4d4d8', border: '#3f3f46' },
+  hot: { bg: '#241617', color: '#fecdd3', border: '#5f2d33' },
+  warm: { bg: '#15202c', color: '#bfdbfe', border: '#29445f' },
+  cold: { bg: '#142015', color: '#bbf7d0', border: '#2a4931' },
   new: { bg: '#141414', color: '#e5e7eb', border: '#3f3f46' },
   qualifying: { bg: '#1a1a1a', color: '#f3f4f6', border: '#52525b' },
   queued: { bg: '#141414', color: '#e5e7eb', border: '#3f3f46' },
@@ -213,23 +214,23 @@ function salesActionForLead(lead) {
 }
 
 const STYLES = `
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Audiowide&family=DM+Sans:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap');
 
   :root {
     --bg: #000000;
     --panel: rgba(8, 8, 8, 0.94);
     --panel-soft: #0d0d0d;
     --panel-border: #2a2a2a;
-    --accent: #bbf7d0;
-    --accent-2: #dcfce7;
+    --accent: #86efac;
+    --accent-2: #bbf7d0;
     --text-main: #f3f4f6;
     --text-soft: #cbd5e1;
   }
 
   @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(245,245,245,0.35); }
-    70% { box-shadow: 0 0 0 12px rgba(245,245,245,0); }
-    100% { box-shadow: 0 0 0 0 rgba(245,245,245,0); }
+    0% { border-color: #4b5563; background: #171717; transform: translateX(0); }
+    50% { border-color: #86efac; background: #1b1b1b; transform: translateX(1px); }
+    100% { border-color: #4b5563; background: #171717; transform: translateX(0); }
   }
 
   @keyframes toastIn {
@@ -267,15 +268,20 @@ const STYLES = `
     background: #000000;
     color: var(--text-main);
     font-family: 'DM Sans', sans-serif;
-    padding: 40px;
+    padding: 0;
   }
 
   .carlet-layout {
-    max-width: 1560px;
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
+    min-height: 100vh;
     display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 28px;
+    grid-template-columns: var(--sidebar-width, 280px) minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .carlet-layout.sidebar-collapsed {
+    --sidebar-width: 96px;
   }
 
   .panel {
@@ -314,7 +320,48 @@ const STYLES = `
     padding: 24px;
     align-self: start;
     position: sticky;
-    top: 40px;
+    top: 0;
+  }
+
+  .side-panel {
+    min-height: 100vh;
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-bottom: none;
+    box-shadow: none;
+    background: #060606;
+  }
+
+  .sidebar-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .sidebar-collapse-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: 1px solid #2f2f2f;
+    background: #111111;
+    color: #d4d4d8;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .sidebar-collapse-btn:hover {
+    border-color: #4b5563;
+    background: #171717;
+  }
+
+  .sidebar-collapse-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 
   .brand {
@@ -328,7 +375,8 @@ const STYLES = `
     width: 42px;
     height: 42px;
     border-radius: 12px;
-    background: #e5e7eb;
+    background: #86efac;
+    border: 1px solid #4ade80;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -345,8 +393,9 @@ const STYLES = `
 
   .sidebar-title {
     font-size: 24px;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Audiowide', 'Space Grotesk', sans-serif;
     font-weight: 800;
+    letter-spacing: 0.04em;
     margin-bottom: 4px;
   }
 
@@ -396,6 +445,53 @@ const STYLES = `
 
   .nav-btn-arrow {
     opacity: 0.45;
+  }
+
+  .main-shell {
+    min-width: 0;
+    padding: 24px 28px;
+  }
+
+  .sidebar-collapsed .sidebar {
+    padding: 20px 12px;
+  }
+
+  .sidebar-collapsed .sidebar-top {
+    position: relative;
+    justify-content: center;
+  }
+
+  .sidebar-collapsed .sidebar-desc,
+  .sidebar-collapsed .sidebar-label,
+  .sidebar-collapsed .sidebar-title,
+  .sidebar-collapsed .nav-btn-text,
+  .sidebar-collapsed .nav-btn-arrow {
+    display: none;
+  }
+
+  .sidebar-collapsed .brand {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .sidebar-collapsed .brand > div:not(.brand-mark) {
+    display: none;
+  }
+
+  .sidebar-collapsed .sidebar-collapse-btn {
+    position: absolute;
+    right: 2px;
+    top: 4px;
+  }
+
+  .sidebar-collapsed .nav-btn {
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .sidebar-collapsed .nav-btn-label {
+    gap: 0;
   }
 
   .nav-btn:focus-visible {
@@ -457,7 +553,7 @@ const STYLES = `
     border: none;
     border-radius: 14px;
     padding: 14px 20px;
-    background: #dcfce7;
+    background: #86efac;
     color: #052e16;
     font-weight: 800;
     cursor: pointer;
@@ -466,7 +562,7 @@ const STYLES = `
     transition: background 0.15s;
   }
 
-  .btn-primary:hover { background: #bbf7d0; }
+  .btn-primary:hover { background: #4ade80; color: #04170d; }
   .btn-primary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   .btn-secondary {
@@ -821,8 +917,17 @@ const STYLES = `
       grid-template-columns: 1fr;
     }
 
+    .main-shell {
+      padding: 16px;
+    }
+
     .sidebar {
       position: static;
+    }
+
+    .side-panel {
+      min-height: auto;
+      border-right: 1px solid var(--panel-border);
     }
 
     .inbox-grid,
@@ -836,6 +941,10 @@ const STYLES = `
   @media (max-width: 720px) {
     .carlet-root {
       padding: 14px;
+    }
+
+    .main-shell {
+      padding: 0;
     }
 
     .header-title {
@@ -880,7 +989,7 @@ function EmptyState({ text = 'No leads in this stage' }) {
 function SectionTitle({ icon: Icon, title }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-      {Icon && <Icon size={18} color="#f3f4f6" />}
+      {Icon && <Icon size={18} color="#bbf7d0" />}
       <div style={{ fontWeight: 800, fontSize: 18 }}>{title}</div>
     </div>
   );
@@ -888,6 +997,7 @@ function SectionTitle({ icon: Icon, title }) {
 
 export default function CarletYel6AIDemo() {
   const [tab, setTab] = useState('executive');
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [leads, setLeads] = useState(initialLeads);
   const [selectedLeadId, setSelectedLeadId] = useState(initialLeads[0].id);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -1030,14 +1140,27 @@ export default function CarletYel6AIDemo() {
   return (
     <div className="carlet-root">
       <style>{STYLES}</style>
-      <div className="carlet-layout">
+      <div className={`carlet-layout ${sidebarOpen ? '' : 'sidebar-collapsed'}`}>
         {/* Sidebar */}
-        <aside className="panel sidebar" style={{ '--delay': '40ms' }}>
-          <div className="brand">
-            <div>
-              <div className="sidebar-label">YEL6AI OS</div>
-              <div className="sidebar-title">Carlet</div>
+        <aside className="panel sidebar side-panel" style={{ '--delay': '40ms' }}>
+          <div className="sidebar-top">
+            <div className="brand">
+              <div className="brand-mark" aria-hidden="true">
+                <Car size={20} strokeWidth={2.4} />
+              </div>
+              <div>
+                <div className="sidebar-label">YEL6AI OS</div>
+                <div className="sidebar-title">Carlet</div>
+              </div>
             </div>
+            <button
+              className="sidebar-collapse-btn"
+              onClick={() => setSidebarOpen((prev) => !prev)}
+              aria-label={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+              title={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+            >
+              <ChevronRight size={16} style={{ transform: sidebarOpen ? 'rotate(180deg)' : 'none' }} />
+            </button>
           </div>
           <div className="sidebar-desc">Operational control system for lead capture, qualification, sales routing, stock matching, and reactivation.</div>
           <nav className="nav-grid" aria-label="Main navigation">
@@ -1050,7 +1173,7 @@ export default function CarletYel6AIDemo() {
               >
                 <span className="nav-btn-label">
                   <item.icon className="nav-btn-icon" />
-                  {item.label}
+                  <span className="nav-btn-text">{item.label}</span>
                 </span>
                 <ChevronRight size={16} className="nav-btn-arrow" />
               </button>
@@ -1059,10 +1182,10 @@ export default function CarletYel6AIDemo() {
         </aside>
 
         {/* Main */}
-        <main>
+        <main className="main-shell">
           <div className="utility-row">
             <label className="search-shell" aria-label="Search leads">
-              <Search size={16} color="#d4d4d8" />
+              <Search size={16} color="#bbf7d0" />
               <input type="text" value="" readOnly placeholder="Search lead, vehicle, branch" />
             </label>
             <div className="utility-actions">
