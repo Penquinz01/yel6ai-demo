@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import {
   Bell,
   Building2,
-  Car,
   ChevronRight,
   Database,
   Inbox,
@@ -1038,7 +1037,6 @@ export default function CarletYel6AIDemo() {
         {/* Sidebar */}
         <aside className="panel sidebar" style={{ '--delay': '40ms' }}>
           <div className="brand">
-            <div className="brand-mark"><Car size={20} strokeWidth={2.4} /></div>
             <div>
               <div className="sidebar-label">YEL6AI OS</div>
               <div className="sidebar-title">Carlet</div>
