@@ -267,7 +267,7 @@ const STYLES = `
 
   * { box-sizing: border-box; }
 
-  .carlet-root {
+  .dealership-root {
     min-height: 100vh;
     background: var(--bg);
     color: var(--text-main);
@@ -276,7 +276,7 @@ const STYLES = `
     transition: background 240ms ease, color 240ms ease;
   }
 
-  .carlet-root.theme-light {
+  .dealership-root.theme-light {
     --bg: #f3f5f8;
     --panel: rgba(255, 255, 255, 0.94);
     --panel-soft: #ffffff;
@@ -287,142 +287,142 @@ const STYLES = `
     --text-soft: #334155;
   }
 
-  .carlet-root.theme-light .side-panel {
+  .dealership-root.theme-light .side-panel {
     background: #eef2f7;
   }
 
-  .carlet-root.theme-light .sidebar-label {
+  .dealership-root.theme-light .sidebar-label {
     color: #64748b;
   }
 
-  .carlet-root.theme-light .sidebar-desc,
-  .carlet-root.theme-light .header-sub,
-  .carlet-root.theme-light .text-muted,
-  .carlet-root.theme-light .label-sub,
-  .carlet-root.theme-light .lead-fact-label,
-  .carlet-root.theme-light .label-upper {
+  .dealership-root.theme-light .sidebar-desc,
+  .dealership-root.theme-light .header-sub,
+  .dealership-root.theme-light .text-muted,
+  .dealership-root.theme-light .label-sub,
+  .dealership-root.theme-light .lead-fact-label,
+  .dealership-root.theme-light .label-upper {
     color: #475569;
   }
 
-  .carlet-root.theme-light .header-label {
+  .dealership-root.theme-light .header-label {
     color: #64748b;
   }
 
-  .carlet-root.theme-light .nav-btn--active {
+  .dealership-root.theme-light .nav-btn--active {
     border-color: #cbd5e1;
     background: #ffffff;
     color: #0f172a;
   }
 
-  .carlet-root.theme-light .nav-btn--inactive {
+  .dealership-root.theme-light .nav-btn--inactive {
     border-color: #d7deea;
     background: #f8fafc;
     color: #334155;
   }
 
-  .carlet-root.theme-light .nav-btn--inactive:hover {
+  .dealership-root.theme-light .nav-btn--inactive:hover {
     background: #f1f5f9;
     border-color: #cbd5e1;
   }
 
-  .carlet-root.theme-light .search-shell,
-  .carlet-root.theme-light .icon-btn,
-  .carlet-root.theme-light .profile-chip {
+  .dealership-root.theme-light .search-shell,
+  .dealership-root.theme-light .icon-btn,
+  .dealership-root.theme-light .profile-chip {
     background: #ffffff;
     border-color: #d7deea;
     color: #0f172a;
   }
 
-  .carlet-root.theme-light .btn-secondary {
+  .dealership-root.theme-light .btn-secondary {
     border-color: #cbd5e1;
     background: #ffffff;
     color: #0f172a;
   }
 
-  .carlet-root.theme-light .btn-secondary:hover {
+  .dealership-root.theme-light .btn-secondary:hover {
     background: #f1f5f9;
     border-color: #94a3b8;
   }
 
-  .carlet-root.theme-light .search-shell input {
+  .dealership-root.theme-light .search-shell input {
     color: #0f172a;
   }
 
-  .carlet-root.theme-light .lead-card {
+  .dealership-root.theme-light .lead-card {
     color: #0f172a;
   }
 
-  .carlet-root.theme-light .lead-card--selected {
+  .dealership-root.theme-light .lead-card--selected {
     background: #eef2f7;
     border-color: #cbd5e1;
   }
 
-  .carlet-root.theme-light .lead-card--default {
+  .dealership-root.theme-light .lead-card--default {
     background: #ffffff;
     border-color: #d7deea;
   }
 
-  .carlet-root.theme-light .lead-card:hover {
+  .dealership-root.theme-light .lead-card:hover {
     background: #f1f5f9 !important;
   }
 
-  .carlet-root.theme-light .lead-fact {
+  .dealership-root.theme-light .lead-fact {
     background: #ffffff;
     border-color: #d7deea;
   }
 
-  .carlet-root.theme-light .lead-fact-value {
+  .dealership-root.theme-light .lead-fact-value {
     color: #0f172a;
   }
 
-  .carlet-root.theme-light .lead-insight-block {
+  .dealership-root.theme-light .lead-insight-block {
     border-left-color: #93c5fd;
   }
 
-  .carlet-root.theme-light .text-body {
+  .dealership-root.theme-light .text-body {
     color: #1e293b;
   }
 
-  .carlet-root.theme-light .msg-bubble {
+  .dealership-root.theme-light .msg-bubble {
     border-color: #d7deea;
   }
 
-  .carlet-root.theme-light .msg-bubble--ai {
+  .dealership-root.theme-light .msg-bubble--ai {
     background: #f8fafc;
   }
 
-  .carlet-root.theme-light .msg-bubble--customer {
+  .dealership-root.theme-light .msg-bubble--customer {
     background: #ffffff;
   }
 
-  .carlet-root.theme-light .msg-typing {
+  .dealership-root.theme-light .msg-typing {
     background: #f8fafc;
     border-color: #d7deea;
     color: #334155;
   }
 
-  .carlet-root.theme-light .records-table thead tr {
+  .dealership-root.theme-light .records-table thead tr {
     background: #f8fafc;
   }
 
-  .carlet-root.theme-light .records-table th {
+  .dealership-root.theme-light .records-table th {
     color: #334155;
     border-bottom-color: #d7deea;
   }
 
-  .carlet-root.theme-light .records-table tbody tr {
+  .dealership-root.theme-light .records-table tbody tr {
     border-bottom-color: #e2e8f0;
   }
 
-  .carlet-root.theme-light .records-table tbody tr:hover {
+  .dealership-root.theme-light .records-table tbody tr:hover {
     background: #f8fafc;
   }
 
-  .carlet-root.theme-light .empty-state {
+  .dealership-root.theme-light .empty-state {
     color: #64748b;
   }
 
-  .carlet-layout {
+  .dealership-layout {
     max-width: none;
     margin: 0;
     min-height: 100vh;
@@ -431,7 +431,7 @@ const STYLES = `
     gap: 0;
   }
 
-  .carlet-layout.sidebar-collapsed {
+  .dealership-layout.sidebar-collapsed {
     --sidebar-width: 96px;
   }
 
@@ -1160,7 +1160,7 @@ const STYLES = `
   .smoke-item { color: #9fb0c9; line-height: 1.7; font-size: 13px; }
 
   @media (max-width: 1200px) {
-    .carlet-layout {
+    .dealership-layout {
       grid-template-columns: 1fr;
     }
 
@@ -1193,7 +1193,7 @@ const STYLES = `
   }
 
   @media (max-width: 720px) {
-    .carlet-root {
+    .dealership-root {
       padding: 14px;
     }
 
@@ -1249,11 +1249,11 @@ function SectionTitle({ icon: Icon, title }) {
   );
 }
 
-export default function CarletYel6AIDemo() {
+export default function DealerShipYel6AIDemo() {
   const [tab, setTab] = useState('executive');
   const [theme, setTheme] = useState(() => {
     if (typeof window === 'undefined') return 'dark';
-    const savedTheme = window.localStorage.getItem('carlet-theme');
+    const savedTheme = window.localStorage.getItem('dealership-theme');
     return savedTheme === 'light' ? 'light' : 'dark';
   });
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -1397,13 +1397,13 @@ export default function CarletYel6AIDemo() {
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem('carlet-theme', theme);
+    window.localStorage.setItem('dealership-theme', theme);
   }, [theme]);
 
   return (
-    <div className={`carlet-root ${theme === 'light' ? 'theme-light' : 'theme-dark'}`}>
+    <div className={`dealership-root ${theme === 'light' ? 'theme-light' : 'theme-dark'}`}>
       <style>{STYLES}</style>
-      <div className={`carlet-layout ${sidebarOpen ? '' : 'sidebar-collapsed'}`}>
+      <div className={`dealership-layout ${sidebarOpen ? '' : 'sidebar-collapsed'}`}>
         {/* Sidebar */}
         <aside className="panel sidebar side-panel" style={{ '--delay': '40ms' }}>
           <div className="sidebar-top">
@@ -1413,7 +1413,7 @@ export default function CarletYel6AIDemo() {
               </div>
               <div className="brand-meta">
                 <div className="sidebar-label">YEL6AI OS</div>
-                <div className="sidebar-title">Carlet</div>
+                <div className="sidebar-title">DealerShip</div>
               </div>
             </div>
             <button
@@ -1468,7 +1468,7 @@ export default function CarletYel6AIDemo() {
 
           <div className="header-row">
             <div>
-              <div className="header-label">YEL6AI &middot; Carlet Workspace</div>
+              <div className="header-label">YEL6AI &middot; DealerShip Workspace</div>
               <div className="header-title">Lead Command Center</div>
               <div className="header-sub">Used-car lead operating system for faster response, finance-ready buyers, branch visibility, and zero lead leakage.</div>
             </div>
