@@ -423,12 +423,14 @@ const STYLES = `
   }
 
   .dealership-layout {
+    --sidebar-width: 280px;
     max-width: none;
     margin: 0;
     min-height: 100vh;
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
     gap: 0;
+    transition: grid-template-columns var(--panel-motion) var(--panel-ease);
   }
 
   .dealership-layout.sidebar-collapsed {
@@ -722,6 +724,7 @@ const STYLES = `
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .dealership-layout,
     .sidebar,
     .side-panel,
     .sidebar-desc,
