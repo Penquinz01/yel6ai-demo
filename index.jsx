@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import {
   Bell,
-  Building2,
   Car,
   ChevronRight,
   Database,
@@ -16,15 +15,13 @@ import {
   ShieldCheck,
   Sparkles,
   Sun,
-  Users,
 } from 'lucide-react';
 
 const tabs = [
-  { id: 'executive', label: 'Executive Summary', icon: LayoutDashboard },
   { id: 'inbox', label: 'Lead Inbox', icon: Inbox },
   { id: 'pipeline', label: 'Pipeline Board', icon: KanbanSquare },
   { id: 'records', label: 'Lead Records', icon: Database },
-  { id: 'manager', label: 'Manager View', icon: Users },
+  { id: 'executive', label: 'Executive Summary', icon: LayoutDashboard },
   { id: 'reactivation', label: 'Reactivation', icon: RefreshCcw },
 ];
 
@@ -141,7 +138,7 @@ const initialLeads = [
   },
 ];
 
-const reactivationQueue = [
+const initialReactivationQueue = [
   { name: 'Fahad', vehicle: 'Baleno', stage: 'Day 3', sendAt: '6:00 PM', status: 'Queued' },
   { name: 'Shameer', vehicle: 'Brezza', stage: 'Day 7', sendAt: '7:30 PM', status: 'Queued' },
   { name: 'Navas', vehicle: 'i20', stage: 'Day 14', sendAt: 'Tomorrow', status: 'Drafted' },
@@ -188,6 +185,81 @@ const liveScenario = [
   { delay: 1300, type: 'appendMessage', payload: { from: 'customer', text: 'Malappuram. Yes finance. Need in 2 weeks.' }, toast: 'Location, finance and timeline captured' },
   { delay: 1200, type: 'updateLead', payload: { location: 'Malappuram', finance: 'Required', timeline: '7\u201314 days', score: 89, status: 'hot', assigned: 'Athira', financeReadiness: 'Finance-ready', riskLevel: 'Low risk', followupStatus: 'Callback due in 5 min', nextAction: 'Immediate callback', summary: 'High-intent buyer. Budget aligned. Finance required. Purchase intent within two weeks.', activityEntry: { time: 'now-3', text: 'Lead scored 89 / Hot and routed to Athira' } }, toast: 'Lead routed to sales' },
   { delay: 1000, type: 'appendMessage', payload: { from: 'ai', text: "Perfect \u2014 I'm assigning this to our sales team right now. They'll contact you shortly." } },
+];
+
+const reactivationScenario = [
+  {
+    delay: 600,
+    type: 'selectLead',
+    payload: { id: 'LD-1019', tab: 'inbox' },
+    toast: 'Day-3 reactivation message sent to Fahad',
+  },
+  {
+    delay: 800,
+    type: 'markReactivation',
+    payload: { name: 'Fahad', status: 'Sent' },
+  },
+  {
+    delay: 400,
+    type: 'appendMessage',
+    payload: { leadId: 'LD-1019', from: 'ai', text: 'Hi Fahad \u2014 sharing this because you had asked about Baleno earlier. We have matching options available and can assist with finance too. Are you still considering a purchase?' },
+  },
+  {
+    delay: 3000,
+    type: 'appendMessage',
+    payload: { leadId: 'LD-1019', from: 'customer', text: 'Yes still looking. Budget around 7 to 8 lakh.' },
+    toast: 'Customer replied \u2014 lead re-engaged',
+  },
+  {
+    delay: 900,
+    type: 'updateLead',
+    payload: {
+      leadId: 'LD-1019',
+      score: 63,
+      status: 'warm',
+      budget: '\u20B97L\u2013\u20B98L',
+      timeline: '15\u201330 days',
+      summary: 'Re-engaged after Day-3 sequence. Budget confirmed \u20B97\u20138L. Active interest restored.',
+      followupStatus: 'Follow-up due in 24 hrs',
+      nextAction: 'Share inventory options',
+      activityEntry: { text: 'Customer replied to reactivation message \u2014 re-engaged' },
+    },
+    toast: 'Lead upgraded to Warm',
+  },
+  {
+    delay: 800,
+    type: 'appendMessage',
+    payload: { leadId: 'LD-1019', from: 'ai', text: 'We have Baleno Sigma and Delta variants within that range at our Kochi branch. Would you also need finance support?' },
+  },
+  {
+    delay: 2600,
+    type: 'appendMessage',
+    payload: { leadId: 'LD-1019', from: 'customer', text: 'Yes finance needed. Want to visit this weekend.' },
+    toast: 'Finance and visit intent captured',
+  },
+  {
+    delay: 900,
+    type: 'updateLead',
+    payload: {
+      leadId: 'LD-1019',
+      score: 82,
+      status: 'hot',
+      finance: 'Required',
+      financeReadiness: 'Finance-ready',
+      riskLevel: 'Low risk',
+      timeline: '7\u201314 days',
+      summary: 'Fully re-engaged. Budget \u20B97\u20138L, finance required, visit intent this weekend. High purchase intent.',
+      nextAction: 'Assign to closer for visit confirmation',
+      followupStatus: 'Callback due today',
+      activityEntry: { text: 'Finance confirmed, visit intent captured \u2014 re-scored 82 / Hot' },
+    },
+    toast: 'Lead re-scored Hot \u2014 ready for sales',
+  },
+  {
+    delay: 700,
+    type: 'appendMessage',
+    payload: { leadId: 'LD-1019', from: 'ai', text: 'Perfect \u2014 I\u2019m connecting you with our sales team at Kochi. They\u2019ll confirm your visit slot and share finance options shortly.' },
+  },
 ];
 
 const BADGE_COLORS = {
@@ -1253,7 +1325,7 @@ function SectionTitle({ icon: Icon, title }) {
 }
 
 export default function DealerShipYel6AIDemo() {
-  const [tab, setTab] = useState('executive');
+  const [tab, setTab] = useState('inbox');
   const [theme, setTheme] = useState(() => {
     if (typeof window === 'undefined') return 'dark';
     const savedTheme = window.localStorage.getItem('dealership-theme');
@@ -1263,11 +1335,14 @@ export default function DealerShipYel6AIDemo() {
   const [leads, setLeads] = useState(initialLeads);
   const [selectedLeadId, setSelectedLeadId] = useState(initialLeads[0].id);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isReactivating, setIsReactivating] = useState(false);
   const [scenarioIndex, setScenarioIndex] = useState(-1);
+  const [reactivationQueue, setReactivationQueue] = useState(initialReactivationQueue);
   const [toast, setToast] = useState('');
   const [toastPhase, setToastPhase] = useState('idle');
   const timersRef = useRef([]);
   const playingRef = useRef(false);
+  const reactivatingRef = useRef(false);
 
   const selectedLead = useMemo(() => leads.find((l) => l.id === selectedLeadId) || leads[0], [leads, selectedLeadId]);
   const salesAction = useMemo(() => salesActionForLead(selectedLead), [selectedLead]);
@@ -1292,30 +1367,6 @@ export default function DealerShipYel6AIDemo() {
     });
   }, [leads]);
 
-  // Compute dynamic manager data from leads state
-  const teamStats = useMemo(() => {
-    const byOwner = {};
-    leads.forEach((l) => {
-      if (!byOwner[l.assigned]) byOwner[l.assigned] = { active: 0, hot: 0 };
-      byOwner[l.assigned].active++;
-      if (l.status === 'hot') byOwner[l.assigned].hot++;
-    });
-    const team = ['Athira', 'Shihas', 'Anusha', 'Abhilash'];
-    return team.map((name) => ({
-      name,
-      active: byOwner[name]?.active || 0,
-      hot: byOwner[name]?.hot || 0,
-    }));
-  }, [leads]);
-
-  const channelStats = useMemo(() => {
-    const channels = {};
-    leads.forEach((l) => {
-      const ch = l.channel;
-      channels[ch] = (channels[ch] || 0) + 1;
-    });
-    return channels;
-  }, [leads]);
 
   useEffect(() => () => timersRef.current.forEach((id) => clearTimeout(id)), []);
 
@@ -1335,17 +1386,24 @@ export default function DealerShipYel6AIDemo() {
   const resetDemo = useCallback(() => {
     clearTimers();
     playingRef.current = false;
+    reactivatingRef.current = false;
     setLeads(initialLeads);
     setSelectedLeadId(initialLeads[0].id);
     setIsPlaying(false);
+    setIsReactivating(false);
     setScenarioIndex(-1);
+    setReactivationQueue(initialReactivationQueue);
     setToast('');
     setToastPhase('idle');
   }, [clearTimers]);
 
-  const updateLiveLead = useCallback((mutator) => {
-    setLeads((current) => current.map((lead) => (lead.id === 'LD-1088' ? mutator(lead) : lead)));
+  const updateLeadById = useCallback((id, mutator) => {
+    setLeads((current) => current.map((lead) => (lead.id === id ? mutator(lead) : lead)));
   }, []);
+
+  const updateLiveLead = useCallback((mutator) => {
+    updateLeadById('LD-1088', mutator);
+  }, [updateLeadById]);
 
   const applyScenarioStep = useCallback((step, index) => {
     if (!playingRef.current) return;
@@ -1372,6 +1430,54 @@ export default function DealerShipYel6AIDemo() {
     }
     if (step.toast) setToast(step.toast);
   }, [updateLiveLead]);
+
+  const applyReactivationStep = useCallback((step) => {
+    if (!reactivatingRef.current) return;
+    if (step.type === 'selectLead') {
+      setSelectedLeadId(step.payload.id);
+      setTab(step.payload.tab || 'inbox');
+    }
+    if (step.type === 'markReactivation') {
+      setReactivationQueue((q) => q.map((item) => item.name === step.payload.name ? { ...item, status: step.payload.status } : item));
+    }
+    if (step.type === 'appendMessage') {
+      updateLeadById(step.payload.leadId, (lead) => ({
+        ...lead,
+        lastSeen: 'just now',
+        messages: [...lead.messages, { from: step.payload.from, text: step.payload.text }],
+      }));
+    }
+    if (step.type === 'updateLead') {
+      const { leadId, activityEntry, ...rest } = step.payload;
+      updateLeadById(leadId, (lead) => ({
+        ...lead,
+        ...rest,
+        activity: activityEntry ? [{ time: nowLabel(), text: activityEntry.text }, ...lead.activity] : lead.activity,
+      }));
+    }
+    if (step.toast) setToast(step.toast);
+  }, [updateLeadById]);
+
+  const playReactivationDemo = useCallback(() => {
+    resetDemo();
+    Promise.resolve().then(() => {
+      reactivatingRef.current = true;
+      setIsReactivating(true);
+      let total = 200;
+      reactivationScenario.forEach((step) => {
+        total += step.delay;
+        const timer = window.setTimeout(() => {
+          applyReactivationStep(step);
+        }, total);
+        timersRef.current.push(timer);
+      });
+      const endTimer = window.setTimeout(() => {
+        setIsReactivating(false);
+        reactivatingRef.current = false;
+      }, total + 100);
+      timersRef.current.push(endTimer);
+    });
+  }, [resetDemo, applyReactivationStep]);
 
   const playLiveDemo = useCallback(() => {
     resetDemo();
@@ -1476,9 +1582,13 @@ export default function DealerShipYel6AIDemo() {
               <div className="header-sub">Used-car lead operating system for faster response, finance-ready buyers, branch visibility, and zero lead leakage.</div>
             </div>
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-              <button onClick={playLiveDemo} className="btn-primary" disabled={isPlaying}>
+              <button onClick={playLiveDemo} className="btn-primary" disabled={isPlaying || isReactivating}>
                 <Play size={16} />
                 {isPlaying ? 'Running\u2026' : 'Play Live Demo'}
+              </button>
+              <button onClick={playReactivationDemo} className="btn-secondary" disabled={isPlaying || isReactivating}>
+                <RefreshCcw size={16} />
+                {isReactivating ? 'Reactivating\u2026' : 'Play Reactivation Demo'}
               </button>
               <button onClick={resetDemo} className="btn-secondary"><RotateCcw size={16} />Reset</button>
             </div>
@@ -1526,7 +1636,7 @@ export default function DealerShipYel6AIDemo() {
                   <button
                     key={lead.id}
                     onClick={() => setSelectedLeadId(lead.id)}
-                    className={`lead-card ${selectedLeadId === lead.id ? 'lead-card--selected' : 'lead-card--default'} ${lead.id === 'LD-1088' && isPlaying ? 'lead-card--pulse' : ''}`}
+                    className={`lead-card ${selectedLeadId === lead.id ? 'lead-card--selected' : 'lead-card--default'} ${(lead.id === 'LD-1088' && isPlaying) || (lead.id === 'LD-1019' && isReactivating) ? 'lead-card--pulse' : ''}`}
                     aria-pressed={selectedLeadId === lead.id}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10 }}>
@@ -1553,7 +1663,7 @@ export default function DealerShipYel6AIDemo() {
                         <div style={{ lineHeight: 1.55 }}>{msg.text}</div>
                       </div>
                     ))}
-                    {isPlaying && selectedLead.id === 'LD-1088' && scenarioIndex < liveScenario.length - 1 && (
+                    {((isPlaying && selectedLead.id === 'LD-1088' && scenarioIndex < liveScenario.length - 1) || (isReactivating && selectedLead.id === 'LD-1019')) && (
                       <div className="msg-typing">typing&hellip;</div>
                     )}
                   </div>
@@ -1650,7 +1760,7 @@ export default function DealerShipYel6AIDemo() {
                     {pipelineRows.map((lead) => (
                       <tr
                         key={lead.id}
-                        className={lead.id === 'LD-1088' && isPlaying ? 'pipeline-row-live' : ''}
+                        className={(lead.id === 'LD-1088' && isPlaying) || (lead.id === 'LD-1019' && isReactivating) ? 'pipeline-row-live' : ''}
                         onClick={() => { setSelectedLeadId(lead.id); setTab('inbox'); }}
                         onKeyDown={(e) => handleKeyNav(e, () => { setSelectedLeadId(lead.id); setTab('inbox'); })}
                         tabIndex={0}
@@ -1719,39 +1829,6 @@ export default function DealerShipYel6AIDemo() {
                     ))}
                   </tbody>
                 </table>
-              </div>
-            </section>
-          )}
-
-          {/* Manager */}
-          {tab === 'manager' && (
-            <section className="manager-grid" aria-label="Manager View">
-              <div className="panel" style={{ '--delay': '70ms' }}>
-                <SectionTitle icon={Building2} title="Manager Overview" />
-                <div className="stat-grid" style={{ marginBottom: 14 }}>
-                  {[
-                    ['Instagram', `${channelStats['Instagram'] || 0} leads`, 'From DM campaigns'],
-                    ['WhatsApp', `${channelStats['WhatsApp'] || 0} leads`, 'Inbound enquiries'],
-                    ['Finance-Ready', String(financeReady.length), 'ready for faster close'],
-                    ['Sales Load', `${leads.length} total`, `Across ${teamStats.filter((t) => t.active > 0).length} reps`],
-                  ].map(([title, value, sub]) => (
-                    <div key={title} className="panel-sm">
-                      <div className="label-sub">{title}</div>
-                      <div style={{ fontSize: 28, fontWeight: 800, marginTop: 8 }}>{value}</div>
-                      <div className="text-muted" style={{ marginTop: 6, fontSize: 13 }}>{sub}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="panel" style={{ '--delay': '110ms' }}>
-                <SectionTitle icon={Users} title="Team Queue" />
-                {teamStats.map((member) => (
-                  <div key={member.name} className="panel-sm" style={{ marginBottom: 10 }}>
-                    <div style={{ fontWeight: 700 }}>{member.name}</div>
-                    <div className="label-sub" style={{ marginTop: 6 }}>{member.active} active</div>
-                    <div style={{ marginTop: 6, fontSize: 13 }}>{member.hot} hot lead{member.hot !== 1 ? 's' : ''}</div>
-                  </div>
-                ))}
               </div>
             </section>
           )}
